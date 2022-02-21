@@ -40,6 +40,8 @@ class WeatherViewController: UIViewController {
             let actionVC = UIAlertAction(title: "Закрыть", style: .default, handler: nil)
             alertVC.addAction(actionVC)
             self.present(alertVC, animated: true, completion: nil)
+            personEMail.text = ""
+            personPassWord.text = ""
             return
         }
         

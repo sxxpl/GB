@@ -15,6 +15,16 @@
 		AD8B364427B57F1C003FA6CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD8B364327B57F1C003FA6CA /* Assets.xcassets */; };
 		AD8B364727B57F1C003FA6CA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD8B364527B57F1C003FA6CA /* LaunchScreen.storyboard */; };
 		AD8B366227BACEAD003FA6CA /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8B366127BACEAD003FA6CA /* WeatherViewController.swift */; };
+		ADE192A427BD68920027FABF /* FriendTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE192A327BD68920027FABF /* FriendTableViewController.swift */; };
+		ADE192A627BD695A0027FABF /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE192A527BD695A0027FABF /* TestViewController.swift */; };
+		ADE192A827BD6ACC0027FABF /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE192A727BD6ACC0027FABF /* FriendTableViewCell.swift */; };
+		ADE192AE27BD7B3F0027FABF /* FriendCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE192AD27BD7B3F0027FABF /* FriendCollectionViewController.swift */; };
+		ADE192B027BD7B590027FABF /* FriendCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE192AF27BD7B590027FABF /* FriendCollectionViewCell.swift */; };
+		ADE192B327C3FCD90027FABF /* UserStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE192B227C3FCD90027FABF /* UserStruct.swift */; };
+		ADE192B727C3FF630027FABF /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE192B627C3FF630027FABF /* GroupTableViewCell.swift */; };
+		ADE192B927C3FF730027FABF /* GroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE192B827C3FF730027FABF /* GroupTableViewController.swift */; };
+		ADE192BB27C4005F0027FABF /* GroupStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE192BA27C4005F0027FABF /* GroupStruct.swift */; };
+		ADE192BF27C401380027FABF /* DrawningControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE192BE27C401380027FABF /* DrawningControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +38,16 @@
 		AD8B364627B57F1C003FA6CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AD8B364827B57F1C003FA6CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AD8B366127BACEAD003FA6CA /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
+		ADE192A327BD68920027FABF /* FriendTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTableViewController.swift; sourceTree = "<group>"; };
+		ADE192A527BD695A0027FABF /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		ADE192A727BD6ACC0027FABF /* FriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
+		ADE192AD27BD7B3F0027FABF /* FriendCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCollectionViewController.swift; sourceTree = "<group>"; };
+		ADE192AF27BD7B590027FABF /* FriendCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCollectionViewCell.swift; sourceTree = "<group>"; };
+		ADE192B227C3FCD90027FABF /* UserStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStruct.swift; sourceTree = "<group>"; };
+		ADE192B627C3FF630027FABF /* GroupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTableViewCell.swift; sourceTree = "<group>"; };
+		ADE192B827C3FF730027FABF /* GroupTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTableViewController.swift; sourceTree = "<group>"; };
+		ADE192BA27C4005F0027FABF /* GroupStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupStruct.swift; sourceTree = "<group>"; };
+		ADE192BE27C401380027FABF /* DrawningControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawningControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,15 +82,49 @@
 			children = (
 				AD8B363A27B57F18003FA6CA /* AppDelegate.swift */,
 				AD8B363C27B57F18003FA6CA /* SceneDelegate.swift */,
-				AD8B363E27B57F18003FA6CA /* ViewController.swift */,
-				AD8B364027B57F18003FA6CA /* Main.storyboard */,
-				AD8B366127BACEAD003FA6CA /* WeatherViewController.swift */,
-				AD55141C27BD09F100667DD6 /* MainTabBarContoller.swift */,
+				ADE192BD27C401070027FABF /* View */,
+				ADE192BC27C400B30027FABF /* Conrollers */,
+				ADE192B127C3FC9E0027FABF /* Model */,
 				AD8B364327B57F1C003FA6CA /* Assets.xcassets */,
-				AD8B364527B57F1C003FA6CA /* LaunchScreen.storyboard */,
 				AD8B364827B57F1C003FA6CA /* Info.plist */,
 			);
 			path = weatherLesson1;
+			sourceTree = "<group>";
+		};
+		ADE192B127C3FC9E0027FABF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				ADE192B227C3FCD90027FABF /* UserStruct.swift */,
+				ADE192BA27C4005F0027FABF /* GroupStruct.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		ADE192BC27C400B30027FABF /* Conrollers */ = {
+			isa = PBXGroup;
+			children = (
+				AD55141C27BD09F100667DD6 /* MainTabBarContoller.swift */,
+				ADE192A527BD695A0027FABF /* TestViewController.swift */,
+				ADE192A327BD68920027FABF /* FriendTableViewController.swift */,
+				ADE192A727BD6ACC0027FABF /* FriendTableViewCell.swift */,
+				AD8B363E27B57F18003FA6CA /* ViewController.swift */,
+				ADE192B627C3FF630027FABF /* GroupTableViewCell.swift */,
+				ADE192B827C3FF730027FABF /* GroupTableViewController.swift */,
+				ADE192AD27BD7B3F0027FABF /* FriendCollectionViewController.swift */,
+				ADE192AF27BD7B590027FABF /* FriendCollectionViewCell.swift */,
+				AD8B366127BACEAD003FA6CA /* WeatherViewController.swift */,
+			);
+			path = Conrollers;
+			sourceTree = "<group>";
+		};
+		ADE192BD27C401070027FABF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AD8B364527B57F1C003FA6CA /* LaunchScreen.storyboard */,
+				AD8B364027B57F18003FA6CA /* Main.storyboard */,
+				ADE192BE27C401380027FABF /* DrawningControl.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -144,11 +198,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADE192A627BD695A0027FABF /* TestViewController.swift in Sources */,
 				AD55141D27BD09F100667DD6 /* MainTabBarContoller.swift in Sources */,
+				ADE192BF27C401380027FABF /* DrawningControl.swift in Sources */,
+				ADE192B027BD7B590027FABF /* FriendCollectionViewCell.swift in Sources */,
+				ADE192B327C3FCD90027FABF /* UserStruct.swift in Sources */,
+				ADE192AE27BD7B3F0027FABF /* FriendCollectionViewController.swift in Sources */,
 				AD8B363F27B57F18003FA6CA /* ViewController.swift in Sources */,
+				ADE192B727C3FF630027FABF /* GroupTableViewCell.swift in Sources */,
 				AD8B366227BACEAD003FA6CA /* WeatherViewController.swift in Sources */,
 				AD8B363B27B57F18003FA6CA /* AppDelegate.swift in Sources */,
+				ADE192B927C3FF730027FABF /* GroupTableViewController.swift in Sources */,
 				AD8B363D27B57F18003FA6CA /* SceneDelegate.swift in Sources */,
+				ADE192A427BD68920027FABF /* FriendTableViewController.swift in Sources */,
+				ADE192BB27C4005F0027FABF /* GroupStruct.swift in Sources */,
+				ADE192A827BD6ACC0027FABF /* FriendTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
