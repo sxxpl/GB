@@ -25,6 +25,11 @@
 		ADE192B927C3FF730027FABF /* GroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE192B827C3FF730027FABF /* GroupTableViewController.swift */; };
 		ADE192BB27C4005F0027FABF /* GroupStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE192BA27C4005F0027FABF /* GroupStruct.swift */; };
 		ADE192BF27C401380027FABF /* DrawningControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE192BE27C401380027FABF /* DrawningControl.swift */; };
+		ADE192C327C40DD30027FABF /* CanvasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE192C227C40DD30027FABF /* CanvasViewController.swift */; };
+		ADE192CD27C7F8B40027FABF /* 7cb324-11.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ADE192CC27C7F8B40027FABF /* 7cb324-11.jpg */; };
+		ADE192CF27C7FAE50027FABF /* 410773.png in Resources */ = {isa = PBXBuildFile; fileRef = ADE192CE27C7FAE40027FABF /* 410773.png */; };
+		ADE192DB27C8F95C0027FABF /* ProfImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE192DA27C8F95C0027FABF /* ProfImage.swift */; };
+		ADE192DD27C9131D0027FABF /* LikeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE192DC27C9131D0027FABF /* LikeControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +53,11 @@
 		ADE192B827C3FF730027FABF /* GroupTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTableViewController.swift; sourceTree = "<group>"; };
 		ADE192BA27C4005F0027FABF /* GroupStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupStruct.swift; sourceTree = "<group>"; };
 		ADE192BE27C401380027FABF /* DrawningControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawningControl.swift; sourceTree = "<group>"; };
+		ADE192C227C40DD30027FABF /* CanvasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasViewController.swift; sourceTree = "<group>"; };
+		ADE192CC27C7F8B40027FABF /* 7cb324-11.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "7cb324-11.jpg"; path = "../../../../Downloads/7cb324-11.jpg"; sourceTree = "<group>"; };
+		ADE192CE27C7FAE40027FABF /* 410773.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 410773.png; path = ../../../../Downloads/410773.png; sourceTree = "<group>"; };
+		ADE192DA27C8F95C0027FABF /* ProfImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfImage.swift; sourceTree = "<group>"; };
+		ADE192DC27C9131D0027FABF /* LikeControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +97,8 @@
 				ADE192B127C3FC9E0027FABF /* Model */,
 				AD8B364327B57F1C003FA6CA /* Assets.xcassets */,
 				AD8B364827B57F1C003FA6CA /* Info.plist */,
+				ADE192CC27C7F8B40027FABF /* 7cb324-11.jpg */,
+				ADE192CE27C7FAE40027FABF /* 410773.png */,
 			);
 			path = weatherLesson1;
 			sourceTree = "<group>";
@@ -104,15 +116,16 @@
 			isa = PBXGroup;
 			children = (
 				AD55141C27BD09F100667DD6 /* MainTabBarContoller.swift */,
-				ADE192A527BD695A0027FABF /* TestViewController.swift */,
+				AD8B366127BACEAD003FA6CA /* WeatherViewController.swift */,
 				ADE192A327BD68920027FABF /* FriendTableViewController.swift */,
 				ADE192A727BD6ACC0027FABF /* FriendTableViewCell.swift */,
-				AD8B363E27B57F18003FA6CA /* ViewController.swift */,
-				ADE192B627C3FF630027FABF /* GroupTableViewCell.swift */,
-				ADE192B827C3FF730027FABF /* GroupTableViewController.swift */,
 				ADE192AD27BD7B3F0027FABF /* FriendCollectionViewController.swift */,
 				ADE192AF27BD7B590027FABF /* FriendCollectionViewCell.swift */,
-				AD8B366127BACEAD003FA6CA /* WeatherViewController.swift */,
+				ADE192B627C3FF630027FABF /* GroupTableViewCell.swift */,
+				ADE192B827C3FF730027FABF /* GroupTableViewController.swift */,
+				ADE192C227C40DD30027FABF /* CanvasViewController.swift */,
+				ADE192A527BD695A0027FABF /* TestViewController.swift */,
+				AD8B363E27B57F18003FA6CA /* ViewController.swift */,
 			);
 			path = Conrollers;
 			sourceTree = "<group>";
@@ -122,6 +135,8 @@
 			children = (
 				AD8B364527B57F1C003FA6CA /* LaunchScreen.storyboard */,
 				AD8B364027B57F18003FA6CA /* Main.storyboard */,
+				ADE192DC27C9131D0027FABF /* LikeControl.swift */,
+				ADE192DA27C8F95C0027FABF /* ProfImage.swift */,
 				ADE192BE27C401380027FABF /* DrawningControl.swift */,
 			);
 			path = View;
@@ -185,6 +200,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADE192CF27C7FAE50027FABF /* 410773.png in Resources */,
+				ADE192CD27C7F8B40027FABF /* 7cb324-11.jpg in Resources */,
 				AD8B364727B57F1C003FA6CA /* LaunchScreen.storyboard in Resources */,
 				AD8B364427B57F1C003FA6CA /* Assets.xcassets in Resources */,
 				AD8B364227B57F18003FA6CA /* Main.storyboard in Resources */,
@@ -198,6 +215,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADE192C327C40DD30027FABF /* CanvasViewController.swift in Sources */,
 				ADE192A627BD695A0027FABF /* TestViewController.swift in Sources */,
 				AD55141D27BD09F100667DD6 /* MainTabBarContoller.swift in Sources */,
 				ADE192BF27C401380027FABF /* DrawningControl.swift in Sources */,
@@ -211,7 +229,9 @@
 				ADE192B927C3FF730027FABF /* GroupTableViewController.swift in Sources */,
 				AD8B363D27B57F18003FA6CA /* SceneDelegate.swift in Sources */,
 				ADE192A427BD68920027FABF /* FriendTableViewController.swift in Sources */,
+				ADE192DB27C8F95C0027FABF /* ProfImage.swift in Sources */,
 				ADE192BB27C4005F0027FABF /* GroupStruct.swift in Sources */,
+				ADE192DD27C9131D0027FABF /* LikeControl.swift in Sources */,
 				ADE192A827BD6ACC0027FABF /* FriendTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

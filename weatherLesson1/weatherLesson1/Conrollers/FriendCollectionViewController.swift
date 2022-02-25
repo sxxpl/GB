@@ -15,15 +15,11 @@ class FriendCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
-        // Do any additional setup after loading the view.
+    
+    
     }
-
 
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -40,6 +36,8 @@ class FriendCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FriendCollectionCell", for: indexPath) as? FriendCollectionViewCell
         else { exit(0) }
+        
+        cell.friendPhoto.image = UIImage(named: "7cb324-11.jpg")
         
        
         

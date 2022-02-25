@@ -7,8 +7,15 @@
 
 import UIKit
 
-class DrawningControl:UIControl {
+@IBDesignable class DrawningControl:UIControl {
     
+//    var image = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+//    image.layer.cornerRadius = image.frame.size.width/2
+//    image.clipsToBounds = true
+//    view.addSubview(image)
+    
+    
+    @IBInspectable var isToggle: Bool = true
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
@@ -25,8 +32,12 @@ class DrawningControl:UIControl {
         
         context.setFillColor(colorRed.cgColor)
         
-        let rectangleRed = CGRect(x: rect.width/2, y: rect.height/2, width: rect.width/4, height: rect.height/4)
-        context.fill(rectangleRed)
+        if isToggle{
+            
+            
+            let rectangleRed = CGRect(x: rect.width/2, y: rect.height/2, width: rect.width/4, height: rect.height/4)
+            context.fill(rectangleRed)
+        }
         
         context.move(to: CGPoint(x: rect.width/2, y: 0))
         context.addLine(to: CGPoint(x: rect.width/2, y: rect.height/2))
@@ -40,7 +51,7 @@ class DrawningControl:UIControl {
         context.restoreGState()
         
         let triangle = UIBezierPath()
-        triangle.move(to: CGPoint(x: 0, y: rect.height))
+        triangle.move(to: CGPoint(x: 0, y: rect.height/2))
         
         triangle.addLine(to: CGPoint(x: 0, y: rect.height))
         triangle.addLine(to: CGPoint(x:rect.width/2, y: rect.height))
@@ -50,5 +61,41 @@ class DrawningControl:UIControl {
         
         context.addPath(triangle.cgPath)
         context.fillPath()
+        
+        
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOffset = .zero
+        layer.shadowRadius = 5
+        layer.shadowOpacity = 0.7
+        
     }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame )
+        setupGesture()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder )
+        setupGesture()
+    }
+    
+    private func setupGesture() {
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(tapDouble))
+        doubleTap.numberOfTapsRequired = 2
+        addGestureRecognizer(doubleTap)
+        
+//        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(tapDouble))
+//        swipe.direction = .right
+//        addGestureRecognizer(swipe)
+    }
+    
+    @objc private func tapDouble(_ tap:UITapGestureRecognizer){
+        print("tap")
+        isToggle.toggle()
+        
+        sendActions(for: .valueChanged)
+    }
+    
+
 }

@@ -10,13 +10,13 @@ import UIKit
 class FriendTableViewCell: UITableViewCell {
     
     @IBOutlet weak var nextButton: NSLayoutConstraint!
-    @IBOutlet weak var friendImage: UIImageView!
+    @IBOutlet weak var friendImage: ProfImage!
     @IBOutlet weak var friendName: UILabel!
     
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

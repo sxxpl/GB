@@ -44,9 +44,10 @@ class FriendTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FriendCell", for: indexPath) as? FriendTableViewCell else {  preconditionFailure("error")
         }
         cell.friendName.text = friends[indexPath.row].name
+        cell.friendImage.image.image = UIImage(named: "410773.png")
         return cell
     }
-  
+
 
     /*
     // Override to support conditional editing of the table view.
