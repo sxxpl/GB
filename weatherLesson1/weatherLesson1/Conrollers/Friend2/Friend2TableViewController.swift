@@ -1,69 +1,27 @@
 //
-//  GroupTableViewController.swift
+//  Friend2TableViewController.swift
 //  weatherLesson1
 //
-//  Created by Артем Тихонов on 21.02.2022.
+//  Created by Артем Тихонов on 02.03.2022.
 //
 
 import UIKit
 
-class GroupTableViewController: UITableViewController, UISearchBarDelegate {
-    
-    let groups = [
-    Group(name: "Машины"),
-    Group(name: "Москва"),
-    Group(name: "Наука"),
-    Group(name: "Apple"),
+class Friend2TableViewController: UITableViewController {
+    let friends = [
+    User(name: "Антон"),
+    User(name: "Артем"),
+    User(name: "Эльза"),
+    User(name: "Никита"),
     ]
-    
-    var searchActive = false
-    var filtered:[Group] = []
-    
-    @IBOutlet weak var searchBar: UISearchBar!
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        tableView.register(UINib(nibName: "Friend2TableViewCell", bundle: nil), forCellReuseIdentifier: "Friend2TableViewCell")
+    }
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-
-        searchBar.delegate = self
-    }
-    
-    
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchActive = true
-    }
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        searchActive = false
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchActive = false
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchActive = false
-    }
-    
-
-   
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-
-           filtered = groups.filter({ (group) -> Bool in
-               return group.name.contains(searchText)
-           })
-           if(filtered.count == 0){
-               searchActive = false;
-           } else {
-               searchActive = true;
-           }
-           self.tableView.reloadData()
-       }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -73,24 +31,16 @@ class GroupTableViewController: UITableViewController, UISearchBarDelegate {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        if searchActive {
-            return filtered.count }
-        return groups.count
+        return 4
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "GroupCell", for: indexPath) as? GroupTableViewCell else
-        {
-            exit(0)
-        }
-        
-        if searchActive {
-            cell.groupName.text = filtered[indexPath.row].name
-        } else {
-            cell.groupName.text = groups[indexPath.row].name
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Friend2TableViewCell", for: indexPath) as! Friend2TableViewCell
 
+        cell.cellLabel.text = friends[indexPath.row].name
+        cell.cellImage.image = UIImage(named: "410773.png")
+     
         return cell
     }
     
