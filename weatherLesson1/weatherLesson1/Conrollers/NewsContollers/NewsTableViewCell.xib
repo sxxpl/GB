@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -24,17 +25,21 @@
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QIw-p6-isU">
-                        <rect key="frame" x="10" y="353" width="45.5" height="31"/>
+                        <rect key="frame" x="10" y="335" width="45.5" height="31"/>
+                        <color key="tintColor" systemColor="systemBlueColor"/>
                         <state key="normal" title="Button"/>
-                        <buttonConfiguration key="configuration" style="gray" image="heart" catalog="system"/>
+                        <buttonConfiguration key="configuration" style="gray" image="heart" catalog="system" title=""/>
+                        <connections>
+                            <action selector="addLike:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Fyz-si-HZ7"/>
+                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JlK-fa-yPO">
-                        <rect key="frame" x="65.5" y="353" width="48.5" height="31"/>
+                        <rect key="frame" x="65.5" y="335" width="48.5" height="31"/>
                         <state key="normal" title="Button"/>
                         <buttonConfiguration key="configuration" style="gray" image="text.bubble" catalog="system"/>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8wj-Qg-4aH">
-                        <rect key="frame" x="124" y="353" width="46.5" height="31"/>
+                        <rect key="frame" x="124" y="335" width="46.5" height="31"/>
                         <state key="normal" title="Button"/>
                         <buttonConfiguration key="configuration" style="gray" image="arrowshape.turn.up.forward" catalog="system"/>
                     </button>
@@ -51,20 +56,32 @@
                             <constraint firstAttribute="height" constant="20" id="qMK-FO-gnv"/>
                         </constraints>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jO5-8d-Xq0">
+                        <rect key="frame" x="25" y="370" width="14" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="14" id="5sj-W7-dqb"/>
+                            <constraint firstAttribute="width" constant="14" id="XpN-5l-5fm"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="8wj-Qg-4aH" firstAttribute="leading" secondItem="JlK-fa-yPO" secondAttribute="trailing" constant="10" id="5IY-ji-HXO"/>
                     <constraint firstItem="QIw-p6-isU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="9pQ-Z9-Zan"/>
                     <constraint firstItem="YL0-2t-QV8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="CFg-dU-die"/>
-                    <constraint firstItem="QIw-p6-isU" firstAttribute="top" secondItem="YL0-2t-QV8" secondAttribute="bottom" constant="33" id="LIM-h1-Lup"/>
+                    <constraint firstItem="QIw-p6-isU" firstAttribute="top" secondItem="YL0-2t-QV8" secondAttribute="bottom" constant="15" id="LIM-h1-Lup"/>
                     <constraint firstAttribute="bottom" secondItem="I5R-FN-JmT" secondAttribute="bottom" constant="10" id="Veh-ux-rFp"/>
-                    <constraint firstAttribute="bottom" secondItem="QIw-p6-isU" secondAttribute="bottom" constant="10" id="fKi-5B-zh1"/>
+                    <constraint firstItem="jO5-8d-Xq0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="XT5-pU-0MA"/>
+                    <constraint firstAttribute="bottom" secondItem="QIw-p6-isU" secondAttribute="bottom" constant="28" id="fKi-5B-zh1"/>
                     <constraint firstAttribute="trailing" secondItem="I5R-FN-JmT" secondAttribute="trailing" constant="10" id="guq-MN-JcR"/>
-                    <constraint firstAttribute="bottom" secondItem="JlK-fa-yPO" secondAttribute="bottom" constant="10" id="iOj-C8-ngu"/>
+                    <constraint firstAttribute="bottom" secondItem="JlK-fa-yPO" secondAttribute="bottom" constant="28" id="iOj-C8-ngu"/>
                     <constraint firstItem="YL0-2t-QV8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="jln-TX-6NS"/>
+                    <constraint firstItem="jO5-8d-Xq0" firstAttribute="top" secondItem="QIw-p6-isU" secondAttribute="bottom" constant="4" id="k2U-YR-Gru"/>
                     <constraint firstItem="JlK-fa-yPO" firstAttribute="leading" secondItem="QIw-p6-isU" secondAttribute="trailing" constant="10" id="nCI-cC-wtQ"/>
                     <constraint firstAttribute="trailing" secondItem="YL0-2t-QV8" secondAttribute="trailing" id="peO-Yu-4dB"/>
-                    <constraint firstAttribute="bottom" secondItem="8wj-Qg-4aH" secondAttribute="bottom" constant="10" id="rb8-sk-D88"/>
+                    <constraint firstAttribute="bottom" secondItem="8wj-Qg-4aH" secondAttribute="bottom" constant="28" id="rb8-sk-D88"/>
                     <constraint firstAttribute="bottom" secondItem="nmf-Og-az8" secondAttribute="bottom" constant="8" id="tfj-8x-6gF"/>
                     <constraint firstItem="I5R-FN-JmT" firstAttribute="leading" secondItem="nmf-Og-az8" secondAttribute="trailing" constant="5" id="xXG-XN-UCl"/>
                 </constraints>
@@ -74,6 +91,7 @@
                 <outlet property="cellImage" destination="YL0-2t-QV8" id="Pwg-Mx-7qg"/>
                 <outlet property="commentButton" destination="JlK-fa-yPO" id="bwh-uO-ndj"/>
                 <outlet property="likeButton" destination="QIw-p6-isU" id="L15-ts-bCk"/>
+                <outlet property="likeCounter" destination="jO5-8d-Xq0" id="UeN-56-Jg1"/>
                 <outlet property="repostButton" destination="8wj-Qg-4aH" id="ymS-4o-LJp"/>
                 <outlet property="watchLabel" destination="I5R-FN-JmT" id="F17-wu-YtP"/>
             </connections>
@@ -85,5 +103,8 @@
         <image name="eye.fill" catalog="system" width="128" height="78"/>
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="text.bubble" catalog="system" width="128" height="110"/>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

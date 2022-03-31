@@ -37,7 +37,7 @@ class FriendCollectionViewController: UICollectionViewController {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FriendCollectionCell", for: indexPath) as? FriendCollectionViewCell
         else { exit(0) }
         
-        cell.friendPhoto.image = UIImage(named: "7cb324-11.jpg")
+        cell.friendPhoto.image = UIImage(named: "kot")
         
        
         

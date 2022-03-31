@@ -19,6 +19,21 @@ class ProfImage: UIView {
         shadow.layer.shadowRadius = 7
         shadow.layer.shadowOffset = .zero
         shadow.layer.shadowOpacity=0.8
+        
+    
+        
+    }
+    
+    
+    private func setupGesture() {
+        let profImageTap = UITapGestureRecognizer(target: self, action: #selector(profImageTap))
+        profImageTap.numberOfTapsRequired = 1
+        addGestureRecognizer(profImageTap)
+    }
+    @objc private func profImageTap(_ tap:UITapGestureRecognizer){
+        UIView.animate(withDuration: 0.3, delay: 0, options: .autoreverse, animations:{
+            self.transform.scaledBy(x: 0.7, y: 0.7)
+        } )
     }
     
     override func layoutSubviews() {
