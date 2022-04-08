@@ -36,6 +36,8 @@
 		ADE1930D27D7AD120027FABF /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE1930C27D7AD120027FABF /* NewsTableViewCell.swift */; };
 		ADE1932227F0521F0027FABF /* kot.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ADE1932127F0521F0027FABF /* kot.jpg */; };
 		ADE1932927F0940E0027FABF /* LaunchD0wnload.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE1932827F0940E0027FABF /* LaunchD0wnload.swift */; };
+		ADE1936427FF4D090027FABF /* PhotosGalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE1936327FF4D090027FABF /* PhotosGalViewController.swift */; };
+		ADE1936627FF95890027FABF /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE1936527FF95890027FABF /* PhotoCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +73,8 @@
 		ADE1932127F0521F0027FABF /* kot.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = kot.jpg; path = ../../../../Downloads/kot.jpg; sourceTree = "<group>"; };
 		ADE1932327F0522C0027FABF /* kot.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = kot.jpg; sourceTree = "<group>"; };
 		ADE1932827F0940E0027FABF /* LaunchD0wnload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchD0wnload.swift; sourceTree = "<group>"; };
+		ADE1936327FF4D090027FABF /* PhotosGalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosGalViewController.swift; sourceTree = "<group>"; };
+		ADE1936527FF95890027FABF /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +132,7 @@
 		ADE192BC27C400B30027FABF /* Conrollers */ = {
 			isa = PBXGroup;
 			children = (
+				ADE1936727FFA0150027FABF /* BigPhoto */,
 				AD55141C27BD09F100667DD6 /* MainTabBarContoller.swift */,
 				AD8B366127BACEAD003FA6CA /* WeatherViewController.swift */,
 				ADE192A327BD68920027FABF /* FriendTableViewController.swift */,
@@ -176,6 +181,15 @@
 				ADE1930C27D7AD120027FABF /* NewsTableViewCell.swift */,
 			);
 			path = NewsContollers;
+			sourceTree = "<group>";
+		};
+		ADE1936727FFA0150027FABF /* BigPhoto */ = {
+			isa = PBXGroup;
+			children = (
+				ADE1936327FF4D090027FABF /* PhotosGalViewController.swift */,
+				ADE1936527FF95890027FABF /* PhotoCollectionViewCell.swift */,
+			);
+			path = BigPhoto;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -252,11 +266,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADE1936427FF4D090027FABF /* PhotosGalViewController.swift in Sources */,
 				ADE192C327C40DD30027FABF /* CanvasViewController.swift in Sources */,
 				ADE192A627BD695A0027FABF /* TestViewController.swift in Sources */,
 				AD55141D27BD09F100667DD6 /* MainTabBarContoller.swift in Sources */,
 				ADE192BF27C401380027FABF /* DrawningControl.swift in Sources */,
 				ADE192B027BD7B590027FABF /* FriendCollectionViewCell.swift in Sources */,
+				ADE1936627FF95890027FABF /* PhotoCollectionViewCell.swift in Sources */,
 				ADE1930627D7AA100027FABF /* NewsTableViewController.swift in Sources */,
 				ADE192B327C3FCD90027FABF /* UserStruct.swift in Sources */,
 				ADE192AE27BD7B3F0027FABF /* FriendCollectionViewController.swift in Sources */,

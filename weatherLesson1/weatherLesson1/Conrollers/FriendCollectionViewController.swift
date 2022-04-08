@@ -11,6 +11,13 @@ private let reuseIdentifier = "Cell"
 
 
 class FriendCollectionViewController: UICollectionViewController {
+    
+    let photos:[UIImage] = [UIImage(named: "kot")!,
+                  UIImage(named: "rus")!,
+                  UIImage(named: "410773")!,
+                  UIImage(named: "rus")!,
+                  UIImage(named: "410773")!,
+                  UIImage(named: "kot")!]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,14 +37,14 @@ class FriendCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 5
+        return photos.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FriendCollectionCell", for: indexPath) as? FriendCollectionViewCell
         else { exit(0) }
         
-        cell.friendPhoto.image = UIImage(named: "kot")
+        cell.friendPhoto.image = photos[indexPath.row]
         
        
         
@@ -45,6 +52,20 @@ class FriendCollectionViewController: UICollectionViewController {
     
         return cell
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowPhotos",
+           let allPhotoVC = segue.destination as? PhotosGalViewController,
+           let selectedPhoto = collectionView.indexPathsForSelectedItems?.first
+        {
+            allPhotoVC.selectedPhotoIndex = selectedPhoto.item
+            allPhotoVC.profImage = photos
+        }
+    }
+    
+//    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        performSegue(withIdentifier: "ShowPhotos", sender: nil)
+//    }
 
     // MARK: UICollectionViewDelegate
 

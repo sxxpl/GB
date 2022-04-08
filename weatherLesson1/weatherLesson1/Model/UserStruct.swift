@@ -10,9 +10,11 @@ import UIKit
 protocol UserProtocol {
     var name:String{get set}
     var image:UIImage?{get set}
+    var photos: [UIImage]{get set}
 }
 
 struct User:UserProtocol {
     var name:String
     var image:UIImage?
+    var photos: [UIImage] = []
 }
