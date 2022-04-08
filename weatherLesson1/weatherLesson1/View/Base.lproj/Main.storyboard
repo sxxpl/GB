@@ -393,10 +393,10 @@
             </objects>
             <point key="canvasLocation" x="2714" y="82"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Custom Navigation Controller-->
         <scene sceneID="SCZ-uC-KVQ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="fxp-dd-qnx" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="fxp-dd-qnx" customClass="CustomNavigationController" customModule="weatherLesson1" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="xVA-C8-Hwm">
                         <autoresizingMask key="autoresizingMask"/>

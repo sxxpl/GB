@@ -38,6 +38,8 @@
 		ADE1932927F0940E0027FABF /* LaunchD0wnload.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE1932827F0940E0027FABF /* LaunchD0wnload.swift */; };
 		ADE1936427FF4D090027FABF /* PhotosGalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE1936327FF4D090027FABF /* PhotosGalViewController.swift */; };
 		ADE1936627FF95890027FABF /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE1936527FF95890027FABF /* PhotoCollectionViewCell.swift */; };
+		ADE1936928004BCC0027FABF /* CustomAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE1936828004BCC0027FABF /* CustomAnimation.swift */; };
+		ADE1936B28004C020027FABF /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE1936A28004C020027FABF /* CustomNavigationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +77,8 @@
 		ADE1932827F0940E0027FABF /* LaunchD0wnload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchD0wnload.swift; sourceTree = "<group>"; };
 		ADE1936327FF4D090027FABF /* PhotosGalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosGalViewController.swift; sourceTree = "<group>"; };
 		ADE1936527FF95890027FABF /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		ADE1936828004BCC0027FABF /* CustomAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnimation.swift; sourceTree = "<group>"; };
+		ADE1936A28004C020027FABF /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +139,8 @@
 				ADE1936727FFA0150027FABF /* BigPhoto */,
 				AD55141C27BD09F100667DD6 /* MainTabBarContoller.swift */,
 				AD8B366127BACEAD003FA6CA /* WeatherViewController.swift */,
+				ADE1936828004BCC0027FABF /* CustomAnimation.swift */,
+				ADE1936A28004C020027FABF /* CustomNavigationController.swift */,
 				ADE192A327BD68920027FABF /* FriendTableViewController.swift */,
 				ADE192A727BD6ACC0027FABF /* FriendTableViewCell.swift */,
 				ADE192AD27BD7B3F0027FABF /* FriendCollectionViewController.swift */,
@@ -271,12 +277,14 @@
 				ADE192A627BD695A0027FABF /* TestViewController.swift in Sources */,
 				AD55141D27BD09F100667DD6 /* MainTabBarContoller.swift in Sources */,
 				ADE192BF27C401380027FABF /* DrawningControl.swift in Sources */,
+				ADE1936928004BCC0027FABF /* CustomAnimation.swift in Sources */,
 				ADE192B027BD7B590027FABF /* FriendCollectionViewCell.swift in Sources */,
 				ADE1936627FF95890027FABF /* PhotoCollectionViewCell.swift in Sources */,
 				ADE1930627D7AA100027FABF /* NewsTableViewController.swift in Sources */,
 				ADE192B327C3FCD90027FABF /* UserStruct.swift in Sources */,
 				ADE192AE27BD7B3F0027FABF /* FriendCollectionViewController.swift in Sources */,
 				AD8B363F27B57F18003FA6CA /* ViewController.swift in Sources */,
+				ADE1936B28004C020027FABF /* CustomNavigationController.swift in Sources */,
 				ADE192B727C3FF630027FABF /* GroupTableViewCell.swift in Sources */,
 				ADE1932927F0940E0027FABF /* LaunchD0wnload.swift in Sources */,
 				AD8B366227BACEAD003FA6CA /* WeatherViewController.swift in Sources */,

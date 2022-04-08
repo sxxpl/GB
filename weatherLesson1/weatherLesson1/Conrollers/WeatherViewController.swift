@@ -45,8 +45,7 @@ class WeatherViewController: UIViewController {
             return
         }
         
-        let storyBoard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let nextViewContoller = storyBoard.instantiateViewController(withIdentifier: "mainTabBarContoller") as! MainTabBarContoller
+        let nextViewContoller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "mainTabBarContoller") as! MainTabBarContoller
         navigationController?.pushViewController(nextViewContoller, animated: true)
     }
     //    @objc func willShowKeyboard(_ notification: Notification){
