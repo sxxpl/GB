@@ -5,4 +5,14 @@
 //  Created by Артем Тихонов on 11.04.2022.
 //
 
-import Foundation
+import UIKit
+
+class Session {
+    static let instance = Session()
+    
+    var token:String?
+    var userId:Int?
+    
+    private init() {}
+}
+

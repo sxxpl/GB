@@ -40,6 +40,7 @@
 		ADE1936627FF95890027FABF /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE1936527FF95890027FABF /* PhotoCollectionViewCell.swift */; };
 		ADE1936928004BCC0027FABF /* CustomAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE1936828004BCC0027FABF /* CustomAnimation.swift */; };
 		ADE1936B28004C020027FABF /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE1936A28004C020027FABF /* CustomNavigationController.swift */; };
+		ADE1936E280459C90027FABF /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE1936D280459C90027FABF /* Session.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +80,7 @@
 		ADE1936527FF95890027FABF /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		ADE1936828004BCC0027FABF /* CustomAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnimation.swift; sourceTree = "<group>"; };
 		ADE1936A28004C020027FABF /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
+		ADE1936D280459C90027FABF /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +131,7 @@
 				ADE1932327F0522C0027FABF /* kot.jpg */,
 				ADE192B227C3FCD90027FABF /* UserStruct.swift */,
 				ADE192BA27C4005F0027FABF /* GroupStruct.swift */,
+				ADE1936D280459C90027FABF /* Session.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADE1936E280459C90027FABF /* Session.swift in Sources */,
 				ADE1936427FF4D090027FABF /* PhotosGalViewController.swift in Sources */,
 				ADE192C327C40DD30027FABF /* CanvasViewController.swift in Sources */,
 				ADE192A627BD695A0027FABF /* TestViewController.swift in Sources */,
