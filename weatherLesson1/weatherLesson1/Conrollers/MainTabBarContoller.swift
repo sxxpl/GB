@@ -11,7 +11,10 @@ class MainTabBarContoller: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        let serv = VKService()
+        serv.loadFriends()
+        serv.loadGroup()
+        serv.loadPhotos()
         // Do any additional setup after loading the view.
     }
     
