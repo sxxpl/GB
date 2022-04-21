@@ -17,6 +17,7 @@
 		AD8B366227BACEAD003FA6CA /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8B366127BACEAD003FA6CA /* WeatherViewController.swift */; };
 		ADC9B9B2280D581F00C2A940 /* VKService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC9B9B1280D581F00C2A940 /* VKService.swift */; };
 		ADC9B9B4280D7DCE00C2A940 /* webViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC9B9B3280D7DCE00C2A940 /* webViewController.swift */; };
+		ADC9B9B628104EEA00C2A940 /* VKData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC9B9B528104EEA00C2A940 /* VKData.swift */; };
 		ADE192A427BD68920027FABF /* FriendTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE192A327BD68920027FABF /* FriendTableViewController.swift */; };
 		ADE192A627BD695A0027FABF /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE192A527BD695A0027FABF /* TestViewController.swift */; };
 		ADE192A827BD6ACC0027FABF /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE192A727BD6ACC0027FABF /* FriendTableViewCell.swift */; };
@@ -58,6 +59,7 @@
 		AD8B366127BACEAD003FA6CA /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		ADC9B9B1280D581F00C2A940 /* VKService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKService.swift; sourceTree = "<group>"; };
 		ADC9B9B3280D7DCE00C2A940 /* webViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = webViewController.swift; sourceTree = "<group>"; };
+		ADC9B9B528104EEA00C2A940 /* VKData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKData.swift; sourceTree = "<group>"; };
 		ADE192A327BD68920027FABF /* FriendTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTableViewController.swift; sourceTree = "<group>"; };
 		ADE192A527BD695A0027FABF /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		ADE192A727BD6ACC0027FABF /* FriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				ADE1932327F0522C0027FABF /* kot.jpg */,
 				ADE192B227C3FCD90027FABF /* UserStruct.swift */,
 				ADE192BA27C4005F0027FABF /* GroupStruct.swift */,
+				ADC9B9B528104EEA00C2A940 /* VKData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 				ADE192B927C3FF730027FABF /* GroupTableViewController.swift in Sources */,
 				AD8B363D27B57F18003FA6CA /* SceneDelegate.swift in Sources */,
 				ADE192A427BD68920027FABF /* FriendTableViewController.swift in Sources */,
+				ADC9B9B628104EEA00C2A940 /* VKData.swift in Sources */,
 				ADE1930027CFDDC90027FABF /* Friend2TableViewCell.swift in Sources */,
 				ADE192DB27C8F95C0027FABF /* ProfImage.swift in Sources */,
 				ADC9B9B2280D581F00C2A940 /* VKService.swift in Sources */,

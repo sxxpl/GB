@@ -9,12 +9,9 @@ import UIKit
 
 class GroupTableViewController: UITableViewController, UISearchBarDelegate {
     
-    let groups = [
-    Group(name: "Машины"),
-    Group(name: "Москва"),
-    Group(name: "Наука"),
-    Group(name: "Apple"),
-    ]
+    let service = VKService()
+    var VKGroups: VKGroups?
+    var groups = [Group]()
     
     var searchActive = false
     var filtered:[Group] = []
@@ -24,7 +21,7 @@ class GroupTableViewController: UITableViewController, UISearchBarDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        loadGroups()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -92,6 +89,28 @@ class GroupTableViewController: UITableViewController, UISearchBarDelegate {
         }
 
         return cell
+    }
+    
+    private func loadGroups(){
+        service.getGroup{ [weak self] result in
+            switch result {
+            case .success(let friends):
+                DispatchQueue.main.async {
+                    self?.VKGroups = friends
+//                    self?.loadFriendsInfo()
+                    self?.infoTransform()
+                    self?.tableView.reloadData()
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    private func infoTransform(){
+        for response in VKGroups?.response.items ?? [] {
+            self.groups.append(Group(name: response.name, image: UIImage(named: "kot")))
+        }
     }
     
 

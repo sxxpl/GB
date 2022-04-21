@@ -54,8 +54,6 @@ extension webViewController:WKNavigationDelegate {
            let id = params["user_id"] {
             Session.instance.userId = Int(id)
             Session.instance.token = token
-            print("token:", token)
-            print("id:", id)
             decisionHandler(.cancel)
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "mainTabBarContoller") as! MainTabBarContoller
             navigationController?.pushViewController(vc, animated: true)
@@ -82,7 +80,6 @@ private extension webViewController {
                                     URLQueryItem(name: "response_type", value: "token"),
                                     URLQueryItem(name: "revoke", value: "0")]
         guard let url = urlComponents.url else {return}
-        print(url)
         let request = URLRequest(url:url)
         webView.load(request)
     }

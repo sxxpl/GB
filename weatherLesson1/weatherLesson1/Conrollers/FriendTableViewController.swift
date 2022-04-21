@@ -9,33 +9,17 @@ import UIKit
 
 class FriendTableViewController: UITableViewController {
     
-    let friends = [
-    User(name: "Антон"),
-    User(name: "Артем"),
-    User(name: "Эльза"),
-    User(name: "Никита"),
-    User(name: "Антон"),
-    User(name: "Артем"),
-    User(name: "Эльза"),
-    User(name: "Никита"),
-    User(name: "Антон"),
-    User(name: "Артем"),
-    User(name: "Эльза"),
-    User(name: "Никита"),
-    User(name: "Антон"),
-    User(name: "Артем"),
-    User(name: "Эльза"),
-    User(name: "Никита")
-
-    ]
-    
+    let service = VKService()
+    var VKFriends: VKFriends?
+//    var friendsInfo:FriendInformation?
+    var friends=[User]()
     var sortedFriends = [Character:[User]]()
     
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.sortedFriends = sort(friends: friends)
+        loadFriends()
     }
 
     private func sort(friends:[User])->[Character:[User]]{
@@ -58,15 +42,18 @@ class FriendTableViewController: UITableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return sortedFriends.keys.count
+//        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         let keySorted = sortedFriends.keys.sorted()
-        
+
         let friendsCount = sortedFriends[keySorted[section]]?.count ?? 0
-        
+
         return friendsCount
+        
+//        return VKFriends?.response.count ?? 0
     }
 
 
@@ -76,10 +63,11 @@ class FriendTableViewController: UITableViewController {
         
         let firstChar = sortedFriends.keys.sorted()[indexPath.section]
         let friends = sortedFriends[firstChar]!
-        
+
         let friend:User = friends[indexPath.row]
-        
+
         cell.friendName.text = friend.name
+//        cell.friendName.text = "\(VKFriends?.response.items[indexPath.row] ?? 123)"
         cell.friendImage.image.image = UIImage(named: "410773")
         return cell
     }
@@ -87,6 +75,53 @@ class FriendTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         String(sortedFriends.keys.sorted()[section])
+    }
+    
+    private func loadFriends(){
+        service.getFriends { [weak self] result in
+            switch result {
+            case .success(let friends):
+                DispatchQueue.main.async {
+                    self?.VKFriends = friends
+//                    self?.loadFriendsInfo()
+                    self?.infoTransform()
+                    self?.sortedFriends = (self?.sort(friends: self?.friends ?? [])) ?? [:]
+                    self?.tableView.reloadData()
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+//    private func loadFriendsInfo(){
+//        var userIds = ""
+//        for id in VKFriends?.response.items ?? [] {
+//            userIds += String(id) + ","
+//        }
+//        guard !userIds.isEmpty else {
+//            return
+//        }
+//        userIds.removeLast()
+//        service.getFriendsInfo(usersIds: userIds){ [weak self] result in
+//            switch result {
+//            case .success(let friends):
+//                DispatchQueue.main.async {
+//                    self?.friendsInfo = friends
+//                    self?.infoTransform()
+//                    self?.sortedFriends = (self?.sort(friends: self?.friends ?? [])) ?? [:[]]
+//                    self?.tableView.reloadData()
+//                }
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
+//    }
+    
+    private func infoTransform(){
+        for response in VKFriends?.response.items ?? [] {
+            self.friends.append(User(name: response.first_name + " " + response.last_name))
+        }
     }
     /*
     // Override to support conditional editing of the table view.
