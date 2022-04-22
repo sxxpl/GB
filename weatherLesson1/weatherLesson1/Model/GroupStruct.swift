@@ -7,6 +7,8 @@
 
 import UIKit
 
+
+///структура для представления группы в GroupTableViewController
 protocol GroupProtocol {
     var name:String{get set}
     var image:UIImage?{get set}

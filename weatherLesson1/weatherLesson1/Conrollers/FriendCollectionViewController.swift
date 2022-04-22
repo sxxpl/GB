@@ -12,20 +12,17 @@ private let reuseIdentifier = "Cell"
 
 class FriendCollectionViewController: UICollectionViewController {
     
-    let photos:[UIImage] = [UIImage(named: "kot")!,
-                  UIImage(named: "rus")!,
-                  UIImage(named: "410773")!,
-                  UIImage(named: "rus")!,
-                  UIImage(named: "410773")!,
-                  UIImage(named: "kot")!]
+    
+    var id = Int()
+    let service = VKService()
+    var VKFriendsPhoto: VKFriendsPhoto?
+    var photos = [UIImage]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
-    
-    
+        loadPhotos()
     }
 
 
@@ -63,39 +60,25 @@ class FriendCollectionViewController: UICollectionViewController {
         }
     }
     
-//    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        performSegue(withIdentifier: "ShowPhotos", sender: nil)
-//    }
-
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
+    private func loadPhotos(){
+        service.getPhotos(id: self.id) { [weak self] result in
+            switch result {
+            case .success(let friends):
+                DispatchQueue.main.async {
+                    self?.VKFriendsPhoto = friends
+                    self?.infoTransform()
+                    self?.collectionView.reloadData()
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
     
+    private func infoTransform(){
+        for response in VKFriendsPhoto?.response.items ?? [] {
+            self.photos.append(UIImage(data: try! Data(contentsOf: URL(string: response.sizes[response.sizes.endIndex-1].url)!))!)
+        }
     }
-    */
 
 }

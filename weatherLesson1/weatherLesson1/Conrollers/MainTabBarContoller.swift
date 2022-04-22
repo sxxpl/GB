@@ -11,9 +11,7 @@ class MainTabBarContoller: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let serv = VKService()
-        serv.getPhotos()
-        // Do any additional setup after loading the view.
+      
     }
     
 

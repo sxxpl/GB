@@ -215,7 +215,7 @@
                                 <connections>
                                     <outlet property="friendImage" destination="5Cq-hl-T1p" id="HV8-PN-6ea"/>
                                     <outlet property="friendName" destination="6kT-hY-SNm" id="W7T-xZ-CNl"/>
-                                    <segue destination="YpL-dj-vz9" kind="push" id="Vbq-ii-Bxj"/>
+                                    <segue destination="YpL-dj-vz9" kind="push" identifier="LoadPhotos" id="Vbq-ii-Bxj"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

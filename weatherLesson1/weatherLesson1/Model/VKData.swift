@@ -7,10 +7,11 @@
 
 import Foundation
 
+///структуры для парсинга друзей ВК
 struct VKFriends:Decodable{
     let response:FriendsResponse
     
-    enum CodingCase:String,CodingKey {
+    enum CodingKeys:String,CodingKey {
         case response
     }
 }
@@ -19,12 +20,26 @@ struct FriendsResponse: Decodable{
     let count: Int
     let items: [FriendInformationResponse]
     
-    enum CodingCase:String, CodingKey {
+    enum CodingKeys:String, CodingKey {
         case count
         case items
     }
 }
 
+
+struct FriendInformationResponse:Decodable{
+    let id:Int
+    let firstName:String
+    let lastName:String
+    let photoProfile:String
+    
+    enum CodingKeys:String, CodingKey {
+        case id = "id"
+        case firstName = "first_name"
+        case lastName = "last_name"
+        case photoProfile = "photo_100"
+    }
+}
 //struct FriendInformation: Decodable {
 //    let response:[FriendInformationResponse]
 //
@@ -33,23 +48,13 @@ struct FriendsResponse: Decodable{
 //    }
 //}
 
-struct FriendInformationResponse:Decodable{
-    let first_name:String
-    let last_name:String
-    
-    enum CodingCase:String, CodingKey {
-        case first_name
-        case last_name 
-    }
-}
 
 
-
-
+///структуры для парсинга групп ВК
 struct VKGroups:Decodable{
     let response:GroupsResponse
     
-    enum CodingCase:String,CodingKey {
+    enum CodingKeys:String,CodingKey {
         case response
     }
 }
@@ -58,7 +63,7 @@ struct GroupsResponse: Decodable{
     let count: Int
     let items: [GroupInformationResponse]
     
-    enum CodingCase:String, CodingKey {
+    enum CodingKeys:String, CodingKey {
         case count
         case items
     }
@@ -67,8 +72,48 @@ struct GroupsResponse: Decodable{
 struct GroupInformationResponse:Decodable{
     let name: String
     
-    enum CodingCase:String, CodingKey {
+    enum CodingKeys:String, CodingKey {
         case name
+    }
+}
+
+///структуры для парсинга фото ВК
+struct VKFriendsPhoto:Decodable{
+    let response:FriendsPhotoResponse
+    
+    enum CodingKeys:String,CodingKey {
+        case response
+    }
+}
+
+struct FriendsPhotoResponse: Decodable{
+    let count: Int
+    let items: [FriendPhotoInformationResponse]
+    
+    enum CodingKeys:String, CodingKey {
+        case count
+        case items
+    }
+}
+
+struct FriendPhotoInformationResponse:Decodable{
+    let sizes:[FriendPhotoSizes]
+    
+    enum CodingKeys:String, CodingKey {
+        case sizes
+    }
+}
+
+struct FriendPhotoSizes:Decodable {
+    let height:Int
+    let width:Int
+    let url:String
+    let type: String
+    enum CodingKeys:String, CodingKey {
+        case height
+        case width
+        case url
+        case type
     }
 }
 
