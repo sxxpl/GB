@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4029091142EC9CF227B37589 /* Pods_weatherLesson1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 060F3AF6172A34C538B885CB /* Pods_weatherLesson1.framework */; };
+		AD03AC0F282BF3A3002040B6 /* RealmCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD03AC0E282BF3A3002040B6 /* RealmCacheService.swift */; };
 		AD55141D27BD09F100667DD6 /* MainTabBarContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD55141C27BD09F100667DD6 /* MainTabBarContoller.swift */; };
 		AD8B363B27B57F18003FA6CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8B363A27B57F18003FA6CA /* AppDelegate.swift */; };
 		AD8B363D27B57F18003FA6CA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8B363C27B57F18003FA6CA /* SceneDelegate.swift */; };
@@ -50,6 +51,7 @@
 		060F3AF6172A34C538B885CB /* Pods_weatherLesson1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_weatherLesson1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1231B8C2DC1EA45DD9FC352A /* Pods-weatherLesson1.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-weatherLesson1.release.xcconfig"; path = "Target Support Files/Pods-weatherLesson1/Pods-weatherLesson1.release.xcconfig"; sourceTree = "<group>"; };
 		8BE5C86AF9E75C69836C9855 /* Pods-weatherLesson1.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-weatherLesson1.debug.xcconfig"; path = "Target Support Files/Pods-weatherLesson1/Pods-weatherLesson1.debug.xcconfig"; sourceTree = "<group>"; };
+		AD03AC0E282BF3A3002040B6 /* RealmCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmCacheService.swift; sourceTree = "<group>"; };
 		AD55141C27BD09F100667DD6 /* MainTabBarContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarContoller.swift; sourceTree = "<group>"; };
 		AD8B363727B57F18003FA6CA /* weatherLesson1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = weatherLesson1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD8B363A27B57F18003FA6CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				ADE1936828004BCC0027FABF /* CustomAnimation.swift */,
 				ADE1936A28004C020027FABF /* CustomNavigationController.swift */,
 				ADE192A327BD68920027FABF /* FriendTableViewController.swift */,
+				AD03AC0E282BF3A3002040B6 /* RealmCacheService.swift */,
 				ADE192A727BD6ACC0027FABF /* FriendTableViewCell.swift */,
 				ADE192AD27BD7B3F0027FABF /* FriendCollectionViewController.swift */,
 				ADE192AF27BD7B590027FABF /* FriendCollectionViewCell.swift */,
@@ -362,6 +365,7 @@
 				ADC9B9B4280D7DCE00C2A940 /* webViewController.swift in Sources */,
 				ADE192BF27C401380027FABF /* DrawningControl.swift in Sources */,
 				ADE1936928004BCC0027FABF /* CustomAnimation.swift in Sources */,
+				AD03AC0F282BF3A3002040B6 /* RealmCacheService.swift in Sources */,
 				ADE192B027BD7B590027FABF /* FriendCollectionViewCell.swift in Sources */,
 				ADE1936627FF95890027FABF /* PhotoCollectionViewCell.swift in Sources */,
 				ADE1930627D7AA100027FABF /* NewsTableViewController.swift in Sources */,

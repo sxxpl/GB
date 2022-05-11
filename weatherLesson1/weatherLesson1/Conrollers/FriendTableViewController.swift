@@ -1,4 +1,4 @@
-//
+
 //  FriendTableViewController.swift
 //  weatherLesson1
 //
@@ -9,27 +9,36 @@ import UIKit
 import RealmSwift
 
 class FriendTableViewController: UITableViewController {
-    
+
     let service = VKService()
     var VKFriendsModel: Results<VKFriends>?
 //    var friendsInfo:FriendInformation?
     var friends=[User]()
     var sortedFriends = [Character:[User]]()
-    
 
-    
+    private var notificationToken: NotificationToken?
+
+    let realm = RealmCacheService()
+
+    private var friendRespons: Results<VKFriends>? {
+        realm.read(VKFriends.self)
+    }
+
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        createNotificatoinToken()
         loadFriends()
     }
 
-    
+
     ///сортировка для отображения друзей по алфавиту
     private func sort(friends:[User])->[Character:[User]]{
         var friendDict = [Character:[User]]()
         friends.forEach(){friend in
             guard let firstChar = friend.name.first else {return}
-            
+
             if var thisCharFriends = friendDict[firstChar]{
                 thisCharFriends.append(friend)
                 friendDict[firstChar] = thisCharFriends
@@ -39,7 +48,7 @@ class FriendTableViewController: UITableViewController {
         }
         return friendDict
     }
-    
+
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -55,7 +64,7 @@ class FriendTableViewController: UITableViewController {
         let friendsCount = sortedFriends[keySorted[section]]?.count ?? 0
 
         return friendsCount
-        
+
 //        return VKFriends?.response.count ?? 0
     }
 
@@ -63,7 +72,7 @@ class FriendTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FriendCell", for: indexPath) as? FriendTableViewCell else {  preconditionFailure("error")
         }
-        
+
         let firstChar = sortedFriends.keys.sorted()[indexPath.section]
         let friends = sortedFriends[firstChar]!
 
@@ -79,13 +88,13 @@ class FriendTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         String(sortedFriends.keys.sorted()[section])
     }
-    
-    
+
+
     ///загрузка друзей вк
     private func loadFriends(){
         service.getFriends { [weak self]  in
                 DispatchQueue.main.async {
-                    self?.VKFriendsModel = self?.loadFriendsFromRealm()
+                    self?.VKFriendsModel = self?.friendRespons
 //                    self?.loadFriendsInfo()
                     self?.infoTransform()
                     self?.sortedFriends = (self?.sort(friends: self?.friends ?? [])) ?? [:]
@@ -93,18 +102,18 @@ class FriendTableViewController: UITableViewController {
                 }
         }
     }
-    
-    func loadFriendsFromRealm() -> Results<VKFriends>?{
-        do{
-            let realm = try Realm()
-            let friends = realm.objects(VKFriends.self)
-            return friends
-        } catch {
-            print(error)
-            return nil
-        }
-    }
-    
+
+//    func loadFriendsFromRealm() -> Results<VKFriends>?{
+//        do{
+//            let realm = try Realm()
+//            let friends = realm.objects(VKFriends.self)
+//            return friends
+//        } catch {
+//            print(error)
+//            return nil
+//        }
+//    }
+
 /// преобразование информации из json  в обычный массив
     private func infoTransform(){
         let list = List<FriendInformationResponse>()
@@ -112,7 +121,7 @@ class FriendTableViewController: UITableViewController {
             self.friends.append(User(name: response.firstName + " " + response.lastName,image: UIImage(data: try! Data(contentsOf: URL(string: response.photoProfile)!))!,id: response.id))
         }
     }
-    
+
     ///передача id для загрузки фото
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "LoadPhotos",
@@ -122,6 +131,33 @@ class FriendTableViewController: UITableViewController {
             allPhotoVC.id = sortedFriends[sortedFriends.keys.sorted()[selectedFriend.section]]?[selectedFriend.row].id ?? 0
         }
     }
+
+    func createNotificatoinToken(){
+        notificationToken = friendRespons?.observe{ [weak self] result in
+            guard let self = self else {return}
+            switch result{
+            case .initial(let friendData):
+                print("\(friendData.count)")
+            case .update(let groups,
+                         deletions: let deletions,
+                         insertions: let insertions,
+                         modifications: let modifications):
+                let deletionsIndexpath = deletions.map{IndexPath(row: $0, section: $0)}
+                let insertionsIndexpath = insertions.map{IndexPath(row: $0, section: $0)}
+                let modificationsIndexpath = modifications.map{IndexPath(row: $0, section: $0)}
+
+                DispatchQueue.main.async {
+                    self.tableView.beginUpdates()
+                    self.tableView.deleteRows(at: deletionsIndexpath, with: .automatic)
+                    self.tableView.insertRows(at: insertionsIndexpath, with: .automatic)
+                    self.tableView.reloadRows(at: modificationsIndexpath, with: .automatic)
+                    self.tableView.endUpdates()
+                }
+            case .error(let error):
+                print(error)
+                }
+            }
+        }
 
 }
 //    private func loadFriendsInfo(){
@@ -147,3 +183,7 @@ class FriendTableViewController: UITableViewController {
 //            }
 //        }
 //    }
+
+
+
+

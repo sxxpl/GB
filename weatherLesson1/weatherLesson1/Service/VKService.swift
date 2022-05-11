@@ -114,7 +114,7 @@ final class VKService {
     
     
     ///загрузка фото пользователя
-    func getPhotos(id:Int,completion: @escaping (() -> Void)) {
+    func getPhotos(id:Int,completion: @escaping ((Result<VKFriendsPhoto,Error>) -> ())) {
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = "api.vk.com"
@@ -140,8 +140,7 @@ final class VKService {
             let decoder = JSONDecoder()
             do {
                 let result = try decoder.decode(VKFriendsPhoto.self, from: data)
-                self?.saveFriendsPhoto(friendsPhotos: result)
-                completion()
+                completion(.success(result))
             }catch {
                 print(error)
             }
