@@ -28,7 +28,7 @@ class FriendTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        createNotificatoinToken()
+      //  createNotificatoinToken()
         loadFriends()
     }
 
@@ -147,11 +147,10 @@ class FriendTableViewController: UITableViewController {
                 let modificationsIndexpath = modifications.map{IndexPath(row: $0, section: $0)}
 
                 DispatchQueue.main.async {
-                    self.tableView.beginUpdates()
                     self.tableView.deleteRows(at: deletionsIndexpath, with: .automatic)
                     self.tableView.insertRows(at: insertionsIndexpath, with: .automatic)
                     self.tableView.reloadRows(at: modificationsIndexpath, with: .automatic)
-                    self.tableView.endUpdates()
+                    self.tableView.reloadData()
                 }
             case .error(let error):
                 print(error)

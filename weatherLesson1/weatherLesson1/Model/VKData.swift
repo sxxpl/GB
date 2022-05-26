@@ -84,9 +84,11 @@ final class GroupsResponse:Object, Decodable{
 
 class GroupInformationResponse:Object, Decodable{
     @objc dynamic var name: String
+    @objc dynamic var id: Int
     
     enum CodingKeys:String, CodingKey {
         case name
+        case id
     }
 }
 

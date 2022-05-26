@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import FirebaseDatabase
 
 class GroupTableViewController: UITableViewController, UISearchBarDelegate {
     
@@ -25,14 +26,30 @@ class GroupTableViewController: UITableViewController, UISearchBarDelegate {
         realm.read(VKGroups.self)
     }
     
+    private var groupFirebase:[FirebaseCommunity] = []
+    private var ref = Database.database().reference(withPath: "Communities")
+    
     @IBOutlet weak var searchBar: UISearchBar!
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        createNotificatoinToken()
+     //   createNotificatoinToken()
         loadGroups()
-
+        ref.observe(.value) {snapshot in
+            var communities: [FirebaseCommunity] = []
+            for child in snapshot.children {
+                if let snapshot = child as? DataSnapshot,
+                   let group = FirebaseCommunity(snapshot: snapshot){
+                    communities.append(group)
+                }
+            }
+            print("Добавлена группа")
+            communities.forEach{print($0)}
+                
+        }
+        
+        
         searchBar.delegate = self
     }
     
@@ -80,6 +97,9 @@ class GroupTableViewController: UITableViewController, UISearchBarDelegate {
         return groups.count
     }
 
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//
+//    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "GroupCell", for: indexPath) as? GroupTableViewCell else
@@ -121,6 +141,9 @@ class GroupTableViewController: UITableViewController, UISearchBarDelegate {
     private func infoTransform(){
         for response in VKGroupsModel?.first?.response?.items ?? List<GroupInformationResponse>(){
             self.groups.append(Group(name: response.name, image: UIImage(named: "kot")))
+            let com = FirebaseCommunity(name: response.name, id: response.id)
+            let reference = self.ref.child(response.name.lowercased().removeCharacters(from: ".#$[]"))
+            reference.setValue(com.toAnyObject())
         }
     }
     
