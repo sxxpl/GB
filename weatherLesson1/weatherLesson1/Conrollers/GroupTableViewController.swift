@@ -34,7 +34,7 @@ class GroupTableViewController: UITableViewController, UISearchBarDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-     //   createNotificatoinToken()
+        createNotificatoinToken()
         loadGroups()
         ref.observe(.value) {snapshot in
             var communities: [FirebaseCommunity] = []
@@ -158,9 +158,9 @@ class GroupTableViewController: UITableViewController, UISearchBarDelegate {
                          deletions: let deletions,
                          insertions: let insertions,
                          modifications: let modifications):
-                let deletionsIndexpath = deletions.map{IndexPath(row: $0, section: $0)}
-                let insertionsIndexpath = insertions.map{IndexPath(row: $0, section: $0)}
-                let modificationsIndexpath = modifications.map{IndexPath(row: $0, section: $0)}
+                let deletionsIndexpath = deletions.map{IndexPath(row: $0, section: 0)}
+                let insertionsIndexpath = insertions.map{IndexPath(row: $0, section: 0)}
+                let modificationsIndexpath = modifications.map{IndexPath(row: $0, section: 0)}
                 
                 DispatchQueue.main.async {
                     self.tableView.beginUpdates()
