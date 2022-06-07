@@ -144,3 +144,75 @@ class FriendPhotoSizes:Object,Decodable {
     }
 }
 
+///класс для новостей
+class VKNews: Object, Decodable{
+    @objc dynamic var response:VKResponse?
+    
+    enum CodingKeys:String,CodingKey {
+        case response
+    }
+}
+
+class VKResponse: Object, Decodable{
+    var items = List<NewsItems>()
+    
+    enum CodingKeys:String,CodingKey {
+        case items
+    }
+}
+
+ final class NewsItems: Object, Decodable{
+    @objc dynamic var text:String
+    @objc dynamic var likes:NewsLikes?
+     
+//     var attachments = List<NewsAttachments>()
+    
+    
+    enum CodingKeys:String,CodingKey {
+        case text
+        case likes
+//        case attachments
+    }
+     
+//     convenience init(from decoder: Decoder) throws {
+//         self.init()
+//         let container = try decoder.container(keyedBy: CodingKeys.self)
+//         attachments = try container.decode(List<NewsAttachments>.self, forKey: .attachments)
+//     }
+}
+
+final class NewsLikes: Object, Decodable{
+    @objc dynamic var count:Int
+    
+    enum CodingKeys:String,CodingKey {
+        case count
+    }
+}
+
+//final class NewsAttachments: Object, Decodable{
+//    @objc dynamic var photo:NewsPhoto?
+//    
+//    enum CodingKeys:String,CodingKey {
+//        case photo
+//    }
+//}
+//
+//final class NewsPhoto: Object, Decodable{
+//    var sizes =  List<NewsPhotoSizes>()
+//    
+//    enum CodingKeys:String,CodingKey {
+//        case sizes
+//    }
+//}
+//
+//final class NewsPhotoSizes: Object, Decodable{
+//    @objc dynamic var url:String
+//    
+//    enum CodingKeys:String,CodingKey {
+//        case url
+//    }
+//}
+//
+//
+//
+//

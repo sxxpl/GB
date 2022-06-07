@@ -14,15 +14,13 @@ class LikeTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        numberOfLikes.text = "0"
         // Initialization code
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    func configure(numberOfLikes:Int){
+        self.numberOfLikes.text = String(numberOfLikes)
     }
+    
     @IBAction func addLike(_ sender: Any) {
         UIView.animate(withDuration: 0.1, delay: 0, options: .curveLinear, animations: {
             if !self.likeFlag {

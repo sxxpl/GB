@@ -146,6 +146,39 @@ final class VKService {
             }
         }.resume()
     }
+    
+    
+    func getNews(completion: @escaping ((Result<VKNews,Error>) -> ())){
+        var urlComponents = URLComponents()
+        urlComponents.scheme = "https"
+        urlComponents.host = "api.vk.com"
+        urlComponents.path = "/method/newsfeed.get"
+        urlComponents.queryItems = [URLQueryItem(name: "filters", value: "post"),
+                                    URLQueryItem(name: "count", value: "20"),
+                                    URLQueryItem(name: "access_token", value: Session.instance.token),
+                                    URLQueryItem(name: "v", value: "5.131")]
+        guard let url = urlComponents.url else {return}
+        
+        let request = URLRequest(url: url)
+        
+        print(request)
+        
+        URLSession.shared.dataTask(with: request) {[weak self] data, response, error in
+            if let error = error  {
+                print(error)
+            }
+            guard let data = data else {
+                return
+            }
+            let decoder = JSONDecoder()
+            do {
+                let result = try decoder.decode(VKNews.self, from: data)
+                completion(.success(result))
+            }catch {
+                print(error)
+            }
+        }.resume()
+    }
 }
 
 private extension VKService {
@@ -187,4 +220,10 @@ private extension VKService {
             print(error)
         }
     }
+    
+    
+   
 }
+
+
+

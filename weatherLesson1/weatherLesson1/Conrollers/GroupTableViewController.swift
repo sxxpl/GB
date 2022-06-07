@@ -109,8 +109,10 @@ class GroupTableViewController: UITableViewController, UISearchBarDelegate {
         
         if searchActive {
             cell.groupName.text = filtered[indexPath.row].name
+            cell.groupImage.image = filtered[indexPath.row].image
         } else {
             cell.groupName.text = groups[indexPath.row].name
+            cell.groupImage.image = groups[indexPath.row].image
         }
 
         return cell

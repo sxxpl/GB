@@ -6,15 +6,13 @@
 //
 
 import UIKit
+import RealmSwift
 
 class NewsViewController: UIViewController {
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupTableView()
-        setupConstraints()
-    }
+    let service = VKService()
+    var VKNewsModel: VKNews?
+    var news = [News]()
     
     private lazy var tableView:UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -22,6 +20,12 @@ class NewsViewController: UIViewController {
         return tableView
     }()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupTableView()
+        setupConstraints()
+        loadNews()
+    }
 }
 
 
@@ -50,48 +54,73 @@ extension NewsViewController{
             
         ])
     }
+    
+    private func loadNews(){
+        service.getNews(completion:{ [weak self] result in
+            switch result {
+            case .success(let news):
+                DispatchQueue.main.async {
+                    self?.VKNewsModel = news
+                    self?.infoTransform()
+                    self?.tableView.reloadData()
+                }
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
+    
+    private func infoTransform(){
+        for item in VKNewsModel?.response?.items ?? List<NewsItems>() {
+            self.news.append(News(countOfLikes: item.likes?.count ?? 0, text: item.text,image: UIImage(named: "rus") ?? UIImage()))
+        }
+    }
 }
 
 
 extension NewsViewController:UITableViewDelegate,UITableViewDataSource{
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func configure(_ indexPath:IndexPath) -> UITableViewCell{
         switch indexPath.row {
         case 0:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "AuthorTableViewCell",for: indexPath) as? AuthorTableViewCell else
             {
                 return UITableViewCell()
             }
-            cell.authorImage?.image = UIImage(named: "rus")
-            cell.authorLabel?.text = "author"
+            cell.configure(authorImage: UIImage(named: "rus") ??  UIImage(),authorLabel: "author")
             return cell
         case 1:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "TextTableViewCell") as? TextTableViewCell else
             {
                 return UITableViewCell()
             }
-            cell.cellTextLabel?.text = "text"
+            cell.configure(cellTextLabel: news[indexPath.section].text)
             return cell
         case 2:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoTableViewCell") as? PhotoTableViewCell else
             {
                 return UITableViewCell()
             }
-            cell.cellImage?.image = UIImage(named: "rus")
+            cell.configure(cellImage: news[indexPath.section].image)
             return cell
         case 3:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "LikeTableViewCell") as? LikeTableViewCell else
             {
                 return UITableViewCell()
             }
+            cell.configure(numberOfLikes: news[indexPath.section].countOfLikes)
             return cell
         default:
             return UITableViewCell()
         }
     }
     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+       return configure(indexPath)
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1;
+        return news.count;
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

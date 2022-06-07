@@ -11,15 +11,8 @@ class TextTableViewCell: UITableViewCell {
 
     @IBOutlet weak var cellTextLabel: UILabel?
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    func configure(cellTextLabel: String){
+        self.cellTextLabel?.text = cellTextLabel
+        
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
 }
