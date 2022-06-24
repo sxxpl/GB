@@ -11,7 +11,7 @@ import RealmSwift
 class NewsViewController: UIViewController {
     
     let service = VKService()
-    var VKNewsModel: VKNews?
+    var vkNewsModel: VKNews?
     var news = [News]()
     
     private lazy var tableView:UITableView = {
@@ -60,7 +60,7 @@ extension NewsViewController{
             switch result {
             case .success(let news):
                 DispatchQueue.main.async {
-                    self?.VKNewsModel = news
+                    self?.vkNewsModel = news
                     self?.infoTransform()
                     self?.tableView.reloadData()
                 }
@@ -71,8 +71,8 @@ extension NewsViewController{
     }
     
     private func infoTransform(){
-        for item in VKNewsModel?.response?.items ?? List<NewsItems>() {
-            self.news.append(News(countOfLikes: item.likes?.count ?? 0, text: item.text,image: UIImage(named: "rus") ?? UIImage()))
+        for item in vkNewsModel?.response?.items ?? List<NewsItems>() {
+            self.news.append(News(countOfLikes: item.likes?.count ?? 0, text: item.text,image: UIImage(named: "rus")!))
         }
     }
 }

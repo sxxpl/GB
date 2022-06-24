@@ -12,7 +12,6 @@ class FriendTableViewController: UITableViewController {
 
     let service = VKService()
     var VKFriendsModel: Results<VKFriends>?
-//    var friendsInfo:FriendInformation?
     var friends=[User]()
     var sortedFriends = [Character:[User]]()
 
@@ -103,16 +102,7 @@ class FriendTableViewController: UITableViewController {
         }
     }
 
-//    func loadFriendsFromRealm() -> Results<VKFriends>?{
-//        do{
-//            let realm = try Realm()
-//            let friends = realm.objects(VKFriends.self)
-//            return friends
-//        } catch {
-//            print(error)
-//            return nil
-//        }
-//    }
+
 
 /// преобразование информации из json  в обычный массив
     private func infoTransform(){
@@ -160,29 +150,7 @@ class FriendTableViewController: UITableViewController {
         }
 
 }
-//    private func loadFriendsInfo(){
-//        var userIds = ""
-//        for id in VKFriends?.response.items ?? [] {
-//            userIds += String(id) + ","
-//        }
-//        guard !userIds.isEmpty else {
-//            return
-//        }
-//        userIds.removeLast()
-//        service.getFriendsInfo(usersIds: userIds){ [weak self] result in
-//            switch result {
-//            case .success(let friends):
-//                DispatchQueue.main.async {
-//                    self?.friendsInfo = friends
-//                    self?.infoTransform()
-//                    self?.sortedFriends = (self?.sort(friends: self?.friends ?? [])) ?? [:[]]
-//                    self?.tableView.reloadData()
-//                }
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
-//    }
+
 
 
 

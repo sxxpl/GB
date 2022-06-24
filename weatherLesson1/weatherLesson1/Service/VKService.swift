@@ -8,11 +8,28 @@
 import Foundation
 import UIKit
 import RealmSwift
+import PromiseKit
+
 
 ///класс загрузки информации из ВК
 final class VKService {
     ///загрузка друзей пользователя
     func getFriends(completion: @escaping (() -> Void)) {
+        getFriendsUrl()
+            .then(on: .global(), getFriendsData(_:))
+            .then(getParsedFriendsData(_:))
+            .done(on: .main){ friends in
+                self.saveFriends(friends: friends)
+                completion()
+            }.catch {error in
+                print(error)
+            }
+        
+    }
+    
+    ///url для запроса друзей
+    
+    func getFriendsUrl()->Promise<URL>{
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = "api.vk.com"
@@ -22,61 +39,50 @@ final class VKService {
                                     URLQueryItem(name: "fields", value: "nickname,photo_100"),
                                     URLQueryItem(name: "access_token", value: Session.instance.token),
                                     URLQueryItem(name: "v", value: "5.131")]
-        guard let url = urlComponents.url else {return}
-        
-        let request = URLRequest(url: url)
-        print(url)
-        URLSession.shared.dataTask(with: request) {[weak self]data, response, error in
-            if let error = error  {
-                print(error)
-            }
-            guard let data = data else {
+        return Promise{ resolver in
+            guard let url = urlComponents.url else {
+                resolver.reject(AppError.notCorrectUrl)
                 return
             }
+            resolver.fulfill(url)
+        }
+       
+    }
+    
+    /// запрос
+    func getFriendsData(_ url:URL) -> Promise<Data> {
+        return Promise{ resolver in
+            URLSession.shared.dataTask(with: URLRequest(url:url)) {data, response, error in
+                if let error = error  {
+                    print(error)
+                }
+                guard let data = data else {
+                    resolver.reject(AppError.errorTask)
+                    return
+                }
+                resolver.fulfill(data)
+            }.resume()
+        }
+    }
+    
+    ///парсим данные
+    func getParsedFriendsData(_ data:Data) -> Promise<VKFriends> {
+        return Promise{ resolver in
             let decoder = JSONDecoder()
             do {
                 let result = try decoder.decode(VKFriends.self, from: data)
-                self?.saveFriends(friends: result)
-                completion()
+                resolver.fulfill(result)
             }catch {
-                print(error)
+                resolver.reject(AppError.errorTask)
             }
-        }.resume()
+        }
     }
     
     
-//    func getFriendsInfo(usersIds:String,completion: @escaping ((Result<FriendInformation,Error>) -> ())) {
-//        var urlComponents = URLComponents()
-//        urlComponents.scheme = "https"
-//        urlComponents.host = "api.vk.com"
-//        urlComponents.path = "/method/users.get"
-//        urlComponents.queryItems = [URLQueryItem(name: "user_ids", value: usersIds),
-//                                    URLQueryItem(name: "name_case", value: "nom"),
-//                                    URLQueryItem(name: "access_token", value: Session.instance.token),
-//                                    URLQueryItem(name: "v", value: "5.131")]
-//        guard let url = urlComponents.url else {return}
-//        
-//        let request = URLRequest(url: url)
-//        
-//        print(request)
-//        
-//        URLSession.shared.dataTask(with: request) { data, response, error in
-//            if let error = error  {
-//                print(error)
-//            }
-//            guard let data = data else {
-//                return
-//            }
-//            let decoder = JSONDecoder()
-//            do {
-//                let result = try decoder.decode(FriendInformation.self, from: data)
-//                completion(.success(result))
-//            }catch {
-//                completion(.failure(error))
-//            }
-//        }.resume()
-//    }
-//
+
+    ///
+    ///
+    ///
     ///загрузrа групп пользователя
     func getGroup(completion: @escaping (() -> Void)) {
         var urlComponents = URLComponents()
@@ -114,7 +120,7 @@ final class VKService {
     
     
     ///загрузка фото пользователя
-    func getPhotos(id:Int,completion: @escaping ((Result<VKFriendsPhoto,Error>) -> ())) {
+    func getPhotos(id:Int,completion: @escaping ((Swift.Result<VKFriendsPhoto,Error>) -> ())) {
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = "api.vk.com"
@@ -148,7 +154,7 @@ final class VKService {
     }
     
     
-    func getNews(completion: @escaping ((Result<VKNews,Error>) -> ())){
+    func getNews(completion: @escaping ((Swift.Result<VKNews,Error>) -> ())){
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = "api.vk.com"
