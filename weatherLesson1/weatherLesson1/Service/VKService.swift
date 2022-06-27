@@ -11,6 +11,7 @@ import RealmSwift
 import PromiseKit
 
 
+
 ///класс загрузки информации из ВК
 final class VKService {
     ///загрузка друзей пользователя

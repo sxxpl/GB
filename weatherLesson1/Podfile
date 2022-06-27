@@ -3,4 +3,5 @@ target 'weatherLesson1' do
 	pod 'RealmSwift'
 	pod 'SwiftKeychainWrapper'
 	pod 'PromiseKit'
+	pod 'Alamofire'
 end

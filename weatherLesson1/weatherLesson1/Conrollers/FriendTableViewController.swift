@@ -22,11 +22,16 @@ class FriendTableViewController: UITableViewController {
     private var friendRespons: Results<VKFriends>? {
         realm.read(VKFriends.self)
     }
+    
+    private var photoService: PhotoService?
+    
 
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        photoService = PhotoService(container: tableView)
         createNotificatoinToken()
         loadFriends()
     }
@@ -108,7 +113,7 @@ class FriendTableViewController: UITableViewController {
     private func infoTransform(){
         let list = List<FriendInformationResponse>()
         for response in VKFriendsModel?.first?.response?.items ?? list {
-            self.friends.append(User(name: response.firstName + " " + response.lastName,image: UIImage(data: try! Data(contentsOf: URL(string: response.photoProfile)!))!,id: response.id))
+            self.friends.append(User(name: response.firstName + " " + response.lastName,image: photoService?.photo( byUrl: response.photoProfile) ?? UIImage(),id: response.id))
         }
     }
 

@@ -36,6 +36,7 @@
 		AD03AC43282D7E5A002040B6 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = AD03AC42282D7E5A002040B6 /* FirebaseStorage */; };
 		AD03AC45282D7E5A002040B6 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = AD03AC44282D7E5A002040B6 /* FirebaseStorageCombine-Community */; };
 		AD03AC47282D8246002040B6 /* FirebaseCommunity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD03AC46282D8246002040B6 /* FirebaseCommunity.swift */; };
+		AD2B37542869C7F300107EAF /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2B37532869C7F300107EAF /* PhotoService.swift */; };
 		AD55141D27BD09F100667DD6 /* MainTabBarContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD55141C27BD09F100667DD6 /* MainTabBarContoller.swift */; };
 		AD8B363B27B57F18003FA6CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8B363A27B57F18003FA6CA /* AppDelegate.swift */; };
 		AD8B363D27B57F18003FA6CA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8B363C27B57F18003FA6CA /* SceneDelegate.swift */; };
@@ -90,6 +91,7 @@
 		AD03AC10282D7C7D002040B6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AD03AC12282D7C81002040B6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AD03AC46282D8246002040B6 /* FirebaseCommunity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseCommunity.swift; sourceTree = "<group>"; };
+		AD2B37532869C7F300107EAF /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
 		AD55141C27BD09F100667DD6 /* MainTabBarContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarContoller.swift; sourceTree = "<group>"; };
 		AD8B363727B57F18003FA6CA /* weatherLesson1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = weatherLesson1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD8B363A27B57F18003FA6CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -357,6 +359,7 @@
 				AD03AC0E282BF3A3002040B6 /* RealmCacheService.swift */,
 				ADE36A27283F9AC200C436EB /* StringSymbolsRemove.swift */,
 				ADED6AF62865EE630008636B /* AppError.swift */,
+				AD2B37532869C7F300107EAF /* PhotoService.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -553,6 +556,7 @@
 				ADC9B9B628104EEA00C2A940 /* VKData.swift in Sources */,
 				ADE1930027CFDDC90027FABF /* Friend2TableViewCell.swift in Sources */,
 				ADE192DB27C8F95C0027FABF /* ProfImage.swift in Sources */,
+				AD2B37542869C7F300107EAF /* PhotoService.swift in Sources */,
 				ADC9B9B2280D581F00C2A940 /* VKService.swift in Sources */,
 				AD975BBC2847A85900862E83 /* NewsViewController.swift in Sources */,
 				ADE1930327CFDF930027FABF /* Friend2TableViewController.swift in Sources */,

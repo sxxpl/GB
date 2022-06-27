@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (5.6.1)
   - PromiseKit (6.17.1):
     - PromiseKit/CorePromise (= 6.17.1)
     - PromiseKit/Foundation (= 6.17.1)
@@ -16,23 +17,26 @@ PODS:
   - SwiftKeychainWrapper (4.0.1)
 
 DEPENDENCIES:
+  - Alamofire
   - PromiseKit
   - RealmSwift
   - SwiftKeychainWrapper
 
 SPEC REPOS:
   trunk:
+    - Alamofire
     - PromiseKit
     - Realm
     - RealmSwift
     - SwiftKeychainWrapper
 
 SPEC CHECKSUMS:
+  Alamofire: 87bd8c952f9a4454320fce00d9cc3de57bcadaf5
   PromiseKit: ee485df3d4dc570594d7e7aecae6352697dc6a4c
   Realm: f4674e0e7ee537f67a78d79bd8319bc777d61d06
   RealmSwift: 0e0e4786685c4442bf56d3831dfefb5fa05d6fd6
   SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
 
-PODFILE CHECKSUM: 500e4f36780e483e9fcc3290563f41256d89543f
+PODFILE CHECKSUM: 14a7d4230c12feff3f9a846354eab930635845c2
 
 COCOAPODS: 1.11.3
