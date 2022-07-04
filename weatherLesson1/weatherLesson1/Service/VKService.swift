@@ -18,7 +18,7 @@ final class VKService {
     func getFriends(completion: @escaping (() -> Void)) {
         getFriendsUrl()
             .then(on: .global(), getFriendsData(_:))
-            .then(getParsedFriendsData(_:))
+            .then(on: .global(), getParsedFriendsData(_:))
             .done(on: .main){ friends in
                 self.saveFriends(friends: friends)
                 completion()
@@ -49,6 +49,8 @@ final class VKService {
         }
        
     }
+    
+    
     
     /// запрос
     func getFriendsData(_ url:URL) -> Promise<Data> {
@@ -155,20 +157,16 @@ final class VKService {
     }
     
     
-    func getNews(completion: @escaping ((Swift.Result<VKNews,Error>) -> ())){
-        var urlComponents = URLComponents()
-        urlComponents.scheme = "https"
-        urlComponents.host = "api.vk.com"
-        urlComponents.path = "/method/newsfeed.get"
-        urlComponents.queryItems = [URLQueryItem(name: "filters", value: "post"),
-                                    URLQueryItem(name: "count", value: "20"),
-                                    URLQueryItem(name: "access_token", value: Session.instance.token),
-                                    URLQueryItem(name: "v", value: "5.131")]
-        guard let url = urlComponents.url else {return}
-        
+    func getNews(completion: @escaping ((Swift.Result<VKNews,Error>) -> ()),_ nextForm:String?){
+        var url:URL
+        if let nextForm = nextForm {
+            guard let urll = getNewsUrl(nextForm) else {return}
+            url = urll
+        } else {
+            guard let urll = getNewsUrl() else {return}
+            url = urll
+        }
         let request = URLRequest(url: url)
-        
-        print(request)
         
         URLSession.shared.dataTask(with: request) {[weak self] data, response, error in
             if let error = error  {
@@ -185,6 +183,34 @@ final class VKService {
                 print(error)
             }
         }.resume()
+    }
+    
+    
+    func getNewsUrl()->URL?{
+        var urlComponents = URLComponents()
+        urlComponents.scheme = "https"
+        urlComponents.host = "api.vk.com"
+        urlComponents.path = "/method/newsfeed.get"
+        urlComponents.queryItems = [URLQueryItem(name: "filters", value: "post"),
+                                    URLQueryItem(name: "count", value: "20"),
+                                    URLQueryItem(name: "access_token", value: Session.instance.token),
+                                    URLQueryItem(name: "v", value: "5.131")]
+        return urlComponents.url
+       
+    }
+    
+    func getNewsUrl(_ nextFrom : String)->URL?{
+        var urlComponents = URLComponents()
+        urlComponents.scheme = "https"
+        urlComponents.host = "api.vk.com"
+        urlComponents.path = "/method/newsfeed.get"
+        urlComponents.queryItems = [URLQueryItem(name: "filters", value: "post"),
+                                    URLQueryItem(name: "start_from", value: nextFrom),
+                                    URLQueryItem(name: "count", value: "20"),
+                                    URLQueryItem(name: "access_token", value: Session.instance.token),
+                                    URLQueryItem(name: "v", value: "5.131")]
+        return urlComponents.url
+       
     }
 }
 

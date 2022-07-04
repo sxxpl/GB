@@ -11,11 +11,20 @@ protocol NewsProtocol {
     var countOfLikes:Int{get set}
     var text:String{get set}
     var image:UIImage{get set}
-
+//    var authorName: String {get set}
+//    var authorImage:UIImage{get set}
 }
 
 struct News:NewsProtocol {
-    var countOfLikes:Int
-    var text:String
-    var image:UIImage
+    var countOfLikes:Int = 0
+    var text:String = ""
+    var image:UIImage = UIImage()
+//    var authorName: String = ""
+//    var authorImage:UIImage = UIImage()
+    
+//    init(countOfLikes: Int, text:String,image:UIImage) {
+//        self.countOfLikes = countOfLikes
+//        self.text = text
+//        self.image = image
+//    }
 }

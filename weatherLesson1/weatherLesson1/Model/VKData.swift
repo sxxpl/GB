@@ -155,9 +155,13 @@ class VKNews: Object, Decodable{
 
 class VKResponse: Object, Decodable{
     var items = List<NewsItems>()
+//    var profiles = List<NewsProfiles>()
+    let nextFrom:String = ""
     
     enum CodingKeys:String,CodingKey {
         case items
+//        case profiles
+        case nextFrom = "next_from"
     }
 }
 
@@ -173,13 +177,22 @@ class VKResponse: Object, Decodable{
         case likes
 //        case attachments
     }
-     
-//     convenience init(from decoder: Decoder) throws {
-//         self.init()
-//         let container = try decoder.container(keyedBy: CodingKeys.self)
-//         attachments = try container.decode(List<NewsAttachments>.self, forKey: .attachments)
-//     }
 }
+
+//final class NewsProfiles: Object, Decodable{
+//    @objc dynamic var firstName:String
+//    @objc dynamic var lastName:String
+//    @objc dynamic var photoProfile:String
+//
+//
+//   enum CodingKeys:String,CodingKey {
+//       case firstName = "first_name"
+//       case lastName = "last_name"
+//       case photoProfile = "photo_100"
+//   }
+//}
+
+
 
 final class NewsLikes: Object, Decodable{
     @objc dynamic var count:Int

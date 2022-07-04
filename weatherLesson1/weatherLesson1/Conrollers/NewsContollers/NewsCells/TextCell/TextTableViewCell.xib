@@ -16,23 +16,38 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="164"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AiO-m0-mfF">
-                        <rect key="frame" x="5" y="5" width="310" height="154"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AiO-m0-mfF">
+                        <rect key="frame" x="5" y="5" width="310" height="130"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2rv-Im-OzJ">
+                        <rect key="frame" x="5" y="140" width="310" height="19"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="19" id="muE-0o-SQb"/>
+                        </constraints>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" title="Показать полностью..."/>
+                        <connections>
+                            <action selector="showMore:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="SHD-bD-B2b"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="AiO-m0-mfF" secondAttribute="bottom" constant="5" id="AGD-sh-Brm"/>
+                    <constraint firstAttribute="bottom" secondItem="2rv-Im-OzJ" secondAttribute="bottom" constant="5" id="6jD-TM-6Ou"/>
+                    <constraint firstAttribute="bottom" secondItem="AiO-m0-mfF" secondAttribute="bottom" constant="29" id="FXB-dy-Kay"/>
                     <constraint firstItem="AiO-m0-mfF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="OOm-r6-rhR"/>
+                    <constraint firstAttribute="trailing" secondItem="2rv-Im-OzJ" secondAttribute="trailing" constant="5" id="Sg9-We-qA8"/>
                     <constraint firstItem="AiO-m0-mfF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="eFv-4f-jkV"/>
+                    <constraint firstItem="2rv-Im-OzJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="krd-ar-Geh"/>
                     <constraint firstAttribute="trailing" secondItem="AiO-m0-mfF" secondAttribute="trailing" constant="5" id="oyd-9D-t3o"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="cellTextLabel" destination="AiO-m0-mfF" id="m1H-Dv-7tm"/>
+                <outlet property="showMoreButton" destination="2rv-Im-OzJ" id="BVZ-Xs-GFZ"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="101.11607142857143"/>
         </tableViewCell>
