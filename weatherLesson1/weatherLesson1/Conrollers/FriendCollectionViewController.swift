@@ -16,7 +16,7 @@ class FriendCollectionViewController: UICollectionViewController {
     
     var id = Int()
     let service = VKService()
-    var VKFriendsPhotoModel: Results<VKFriendsPhoto>?
+    var VKFriendsPhotoModel: VKFriendsPhoto?
     var photos = [UIImage]()
 
     override func viewDidLoad() {
@@ -24,6 +24,7 @@ class FriendCollectionViewController: UICollectionViewController {
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
         loadPhotos()
+
     }
 
 
@@ -62,30 +63,37 @@ class FriendCollectionViewController: UICollectionViewController {
     }
     
     private func loadPhotos(){
-        service.getPhotos(id: self.id) { [weak self]  in
+        service.getPhotos(id: self.id) { [weak self] result in
+            switch result {
+            case .success(let photos):
                 DispatchQueue.main.async {
-                    self?.VKFriendsPhotoModel = self?.loadFriendsFromRealm()
+                    self?.VKFriendsPhotoModel = photos
                     self?.infoTransform()
                     self?.collectionView.reloadData()
                 }
+            case .failure(let error):
+                print(error)
+            }
         }
     }
     
-    func loadFriendsFromRealm() -> Results<VKFriendsPhoto>?{
-        do{
-            let realm = try Realm()
-            let photos = realm.objects(VKFriendsPhoto.self)
-            return photos
-        } catch {
-            print(error)
-            return nil
-        }
-    }
+//    private func loadFriendsFromRealm() -> Results<VKFriendsPhoto>?{
+//        do{
+//            let realm = try Realm()
+//            let photos = realm.objects(VKFriendsPhoto.self)
+//            return photos
+//        } catch {
+//            print(error)
+//            return nil
+//        }
+//    }
     
     private func infoTransform(){
-        for response in VKFriendsPhotoModel?.first?.response?.items ?? List<FriendPhotoInformationResponse>() {
+        for response in VKFriendsPhotoModel?.response?.items ?? List<FriendPhotoInformationResponse>() {
             self.photos.append(UIImage(data: try! Data(contentsOf: URL(string: response.sizes[response.sizes.endIndex-1].url)!))!)
         }
     }
 
 }
+
+

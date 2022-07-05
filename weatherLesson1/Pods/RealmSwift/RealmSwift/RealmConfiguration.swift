@@ -58,7 +58,7 @@ extension Realm {
 
          - parameter fileURL:            The local URL to the Realm file.
          - parameter inMemoryIdentifier: A string used to identify a particular in-memory Realm.
-         - parameter syncConfiguration:  For Realms intended to sync with MongoDB Realm, a sync configuration.
+         - parameter syncConfiguration:  For Realms intended to sync with Atlas App Services, a sync configuration.
          - parameter encryptionKey:      An optional 64-byte key to use to encrypt the data.
          - parameter readOnly:           Whether the Realm is read-only (must be true for read-only files).
          - parameter schemaVersion:      The current schema version.
@@ -107,7 +107,7 @@ extension Realm {
         // MARK: Configuration Properties
 
         /**
-         A configuration value used to configure a Realm for synchronization with MongoDB Realm. Mutually
+         A configuration value used to configure a Realm for synchronization with Atlas App Services. Mutually
          exclusive with `inMemoryIdentifier`.
          */
         public var syncConfiguration: SyncConfiguration? {
@@ -264,11 +264,25 @@ extension Realm {
          */
         public var seedFilePath: URL?
 
+        /**
+         Configuration for Realm event recording. Events are enabled if this is set
+         to a non-nil value.
+         */
+        public var eventConfiguration: EventConfiguration?
+
         /// A custom schema to use for the Realm.
         private var customSchema: RLMSchema?
 
         /// If `true`, disables automatic format upgrades when accessing the Realm.
         internal var disableFormatUpgrade: Bool = false
+
+        // MARK: Flexible Sync
+
+        /// Callback for adding subscriptions to the initialization of the Realm
+        internal var initialSubscriptions: ((SyncSubscriptionSet) -> Void)?
+
+        /// If `true` Indicates that the `initialSubscriptions` will run on every app startup.
+        internal var rerunOnOpen: Bool = false
 
         // MARK: Private Methods
 
@@ -302,6 +316,20 @@ extension Realm {
             configuration.setCustomSchemaWithoutCopying(self.customSchema)
             configuration.disableFormatUpgrade = self.disableFormatUpgrade
             configuration.maximumNumberOfActiveVersions = self.maximumNumberOfActiveVersions ?? 0
+            if let eventConfiguration = eventConfiguration {
+                let rlmConfig = RLMEventConfiguration()
+                rlmConfig.partitionPrefix = eventConfiguration.partitionPrefix
+                rlmConfig.syncUser = eventConfiguration.syncUser
+                rlmConfig.metadata = eventConfiguration.metadata
+                rlmConfig.logger = eventConfiguration.logger
+                configuration.eventConfiguration = rlmConfig
+            }
+
+            if let initialSubscriptions = initialSubscriptions {
+                configuration.initialSubscriptions = ObjectiveCSupport.convert(block: initialSubscriptions)
+                configuration.rerunOnOpen = rerunOnOpen
+            }
+
             return configuration
         }
 
@@ -327,6 +355,15 @@ extension Realm {
             configuration.customSchema = rlmConfiguration.customSchema
             configuration.disableFormatUpgrade = rlmConfiguration.disableFormatUpgrade
             configuration.maximumNumberOfActiveVersions = rlmConfiguration.maximumNumberOfActiveVersions
+            if let eventConfiguration = rlmConfiguration.eventConfiguration {
+                configuration.eventConfiguration = EventConfiguration(metadata: eventConfiguration.metadata,
+                                                                      syncUser: eventConfiguration.syncUser,
+                                                                      partitionPrefix: eventConfiguration.partitionPrefix)
+            }
+
+            configuration.initialSubscriptions = ObjectiveCSupport.convert(block: rlmConfiguration.initialSubscriptions)
+            configuration.rerunOnOpen = rlmConfiguration.rerunOnOpen
+
             return configuration
         }
     }

@@ -23,7 +23,7 @@
 #import "RLMBSON_Private.hpp"
 #import "RLMCredentials_Private.hpp"
 #import "RLMMongoClient_Private.hpp"
-#import "RLMRealmConfiguration+Sync.h"
+#import "RLMRealmConfiguration_Private.h"
 #import "RLMSyncConfiguration_Private.hpp"
 #import "RLMSyncSession_Private.hpp"
 #import "RLMUtil.hpp"
@@ -117,6 +117,18 @@ using namespace realm;
     return config;
 }
 
+- (RLMRealmConfiguration *)flexibleSyncConfigurationWithInitialSubscriptions:(RLMFlexibleSyncInitialSubscriptionsBlock)initialSubscriptions
+                                                                 rerunOnOpen:(BOOL)rerunOnOpen {
+    auto syncConfig = [[RLMSyncConfiguration alloc] initWithUser:self
+                                                      stopPolicy:RLMSyncStopPolicyAfterChangesUploaded
+                                              enableFlexibleSync:true];
+    RLMRealmConfiguration *config = [[RLMRealmConfiguration alloc] init];
+    config.initialSubscriptions = initialSubscriptions;
+    config.rerunOnOpen = rerunOnOpen;
+    config.syncConfiguration = syncConfig;
+    return config;
+}
+
 - (void)logOut {
     if (!_user) {
         return;
@@ -140,7 +152,7 @@ using namespace realm;
         return "";
     }
 
-    SyncConfig config(_user, "");
+    SyncConfig config(_user, value);
     auto path = _user->sync_manager()->path_for_realm(config, value);
     if ([NSFileManager.defaultManager fileExistsAtPath:@(path.c_str())]) {
         return path;

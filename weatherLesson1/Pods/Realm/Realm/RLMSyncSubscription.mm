@@ -228,12 +228,11 @@ NSUInteger RLMFastEnumerate(NSFastEnumerationState *state,
 
 #pragma mark - Batch Update subscriptions
 
-- (void)write:(__attribute__((noescape)) void(^)(void))block {
-    return [self write:block onComplete:^(NSError*){}];
+- (void)update:(__attribute__((noescape)) void(^)(void))block {
+    return [self update:block onComplete:^(NSError*){}];
 }
 
-- (void)write:(__attribute__((noescape)) void(^)(void))block
-   onComplete:(void(^)(NSError *))completionBlock {
+- (void)update:(__attribute__((noescape)) void(^)(void))block onComplete:(void(^)(NSError *))completionBlock {
     if (_mutableSubscriptionSet != nil) {
         @throw RLMException(@"Cannot initiate a write transaction on subscription set that is already been updated.");
     }
@@ -248,13 +247,28 @@ NSUInteger RLMFastEnumerate(NSFastEnumerationState *state,
         NSError *err = [[NSError alloc] initWithDomain:RLMFlexibleSyncErrorDomain code:RLMFlexibleSyncErrorCommitSubscriptionSetError userInfo:@{@"reason":@(error.what())}];
         return completionBlock(err);
     }
+    [self waitForSynchronizationOnQueue:nil completionBlock:completionBlock];
+}
+
+- (void)waitForSynchronizationOnQueue:(nullable dispatch_queue_t)queue
+                      completionBlock:(void(^)(NSError *))completionBlock {
     _subscriptionSet->get_state_change_notification(realm::sync::SubscriptionSet::State::Complete)
-        .get_async([completionBlock](realm::StatusWith<realm::sync::SubscriptionSet::State> state) mutable noexcept {
-            if (state.is_ok()) {
-                completionBlock(nil);
+        .get_async([completionBlock, queue](realm::StatusWith<realm::sync::SubscriptionSet::State> state) mutable noexcept {
+            void (^block)(void) = ^{
+                if (state.is_ok()) {
+                    completionBlock(nil);
+                } else {
+                    NSError* error = [[NSError alloc] initWithDomain:RLMFlexibleSyncErrorDomain code:state.get_status().code() userInfo:@{@"reason": @(state.get_status().reason().c_str())}];
+                    completionBlock(error);
+                }
+            };
+
+            if (queue) {
+                dispatch_async(queue, ^{
+                    block();
+                });
             } else {
-                NSError* error = [[NSError alloc] initWithDomain:RLMFlexibleSyncErrorDomain code:state.get_status().code() userInfo:@{@"reason": @(state.get_status().reason().c_str())}];
-                completionBlock(error);
+                block();
             }
         });
 }
@@ -369,10 +383,7 @@ NSUInteger RLMFastEnumerate(NSFastEnumerationState *state,
     if (name != nil) {
         auto iterator = _mutableSubscriptionSet->find([name UTF8String]);
         
-        if (updateExisting) {
-            _mutableSubscriptionSet->insert_or_assign([name UTF8String], query);
-        }
-        else if (iterator == _mutableSubscriptionSet->end()) {
+        if (updateExisting || iterator == _mutableSubscriptionSet->end()) {
             _mutableSubscriptionSet->insert_or_assign([name UTF8String], query);
         }
         else {
