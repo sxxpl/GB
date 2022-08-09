@@ -8,11 +8,29 @@
 import Foundation
 import UIKit
 import RealmSwift
+import PromiseKit
+
+
 
 ///класс загрузки информации из ВК
 final class VKService {
     ///загрузка друзей пользователя
     func getFriends(completion: @escaping (() -> Void)) {
+        getFriendsUrl()
+            .then(on: .global(), getFriendsData(_:))
+            .then(on: .global(), getParsedFriendsData(_:))
+            .done(on: .main){ friends in
+                self.saveFriends(friends: friends)
+                completion()
+            }.catch {error in
+                print(error)
+            }
+        
+    }
+    
+    ///url для запроса друзей
+    
+    func getFriendsUrl()->Promise<URL>{
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = "api.vk.com"
@@ -22,61 +40,52 @@ final class VKService {
                                     URLQueryItem(name: "fields", value: "nickname,photo_100"),
                                     URLQueryItem(name: "access_token", value: Session.instance.token),
                                     URLQueryItem(name: "v", value: "5.131")]
-        guard let url = urlComponents.url else {return}
-        
-        let request = URLRequest(url: url)
-        print(url)
-        URLSession.shared.dataTask(with: request) {[weak self]data, response, error in
-            if let error = error  {
-                print(error)
-            }
-            guard let data = data else {
+        return Promise{ resolver in
+            guard let url = urlComponents.url else {
+                resolver.reject(AppError.notCorrectUrl)
                 return
             }
-            let decoder = JSONDecoder()
-            do {
-                let result = try decoder.decode(VKFriends.self, from: data)
-                self?.saveFriends(friends: result)
-                completion()
-            }catch {
-                print(error)
-            }
-        }.resume()
+            resolver.fulfill(url)
+        }
+       
     }
     
     
-//    func getFriendsInfo(usersIds:String,completion: @escaping ((Result<FriendInformation,Error>) -> ())) {
-//        var urlComponents = URLComponents()
-//        urlComponents.scheme = "https"
-//        urlComponents.host = "api.vk.com"
-//        urlComponents.path = "/method/users.get"
-//        urlComponents.queryItems = [URLQueryItem(name: "user_ids", value: usersIds),
-//                                    URLQueryItem(name: "name_case", value: "nom"),
-//                                    URLQueryItem(name: "access_token", value: Session.instance.token),
-//                                    URLQueryItem(name: "v", value: "5.131")]
-//        guard let url = urlComponents.url else {return}
-//        
-//        let request = URLRequest(url: url)
-//        
-//        print(request)
-//        
-//        URLSession.shared.dataTask(with: request) { data, response, error in
-//            if let error = error  {
-//                print(error)
-//            }
-//            guard let data = data else {
-//                return
-//            }
-//            let decoder = JSONDecoder()
-//            do {
-//                let result = try decoder.decode(FriendInformation.self, from: data)
-//                completion(.success(result))
-//            }catch {
-//                completion(.failure(error))
-//            }
-//        }.resume()
-//    }
-//
+    
+    /// запрос
+    func getFriendsData(_ url:URL) -> Promise<Data> {
+        return Promise{ resolver in
+            URLSession.shared.dataTask(with: URLRequest(url:url)) {data, response, error in
+                if let error = error  {
+                    print(error)
+                }
+                guard let data = data else {
+                    resolver.reject(AppError.errorTask)
+                    return
+                }
+                resolver.fulfill(data)
+            }.resume()
+        }
+    }
+    
+    ///парсим данные
+    func getParsedFriendsData(_ data:Data) -> Promise<VKFriends> {
+        return Promise{ resolver in
+            let decoder = JSONDecoder()
+            do {
+                let result = try decoder.decode(VKFriends.self, from: data)
+                resolver.fulfill(result)
+            }catch {
+                resolver.reject(AppError.errorTask)
+            }
+        }
+    }
+    
+    
+
+    ///
+    ///
+    ///
     ///загрузrа групп пользователя
     func getGroup(completion: @escaping (() -> Void)) {
         var urlComponents = URLComponents()
@@ -114,7 +123,7 @@ final class VKService {
     
     
     ///загрузка фото пользователя
-    func getPhotos(id:Int,completion: @escaping (() -> Void)) {
+    func getPhotos(id:Int,completion: @escaping ((Swift.Result<VKFriendsPhoto,Error>) -> ())) {
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = "api.vk.com"
@@ -140,12 +149,70 @@ final class VKService {
             let decoder = JSONDecoder()
             do {
                 let result = try decoder.decode(VKFriendsPhoto.self, from: data)
-                self?.saveFriendsPhoto(friendsPhotos: result)
-                completion()
+                completion(.success(result))
             }catch {
                 print(error)
             }
         }.resume()
+    }
+    
+    
+    func getNews(completion: @escaping ((Swift.Result<VKNews,Error>) -> ()),_ nextForm:String?){
+        var url:URL
+        if let nextForm = nextForm {
+            guard let urll = getNewsUrl(nextForm) else {return}
+            url = urll
+        } else {
+            guard let urll = getNewsUrl() else {return}
+            url = urll
+        }
+        let request = URLRequest(url: url)
+        
+        URLSession.shared.dataTask(with: request) {[weak self] data, response, error in
+            if let error = error  {
+                print(error)
+            }
+            guard let data = data else {
+                return
+            }
+            let decoder = JSONDecoder()
+            do {
+                let result = try decoder.decode(VKNews.self, from: data)
+                completion(.success(result))
+            }catch {
+                print(error)
+            }
+        }.resume()
+    }
+    
+    
+    func getNewsUrl()->URL?{
+        var urlComponents = URLComponents()
+        urlComponents.scheme = "https"
+        urlComponents.host = "api.vk.com"
+        urlComponents.path = "/method/newsfeed.get"
+        urlComponents.queryItems = [URLQueryItem(name: "filters", value: "post"),
+                                    URLQueryItem(name: "count", value: "20"),
+                                    URLQueryItem(name: "access_token", value: Session.instance.token),
+                                    URLQueryItem(name: "v", value: "5.131")]
+        print(urlComponents.url)
+        return urlComponents.url
+        
+       
+    }
+    
+    func getNewsUrl(_ nextFrom : String)->URL?{
+        var urlComponents = URLComponents()
+        urlComponents.scheme = "https"
+        urlComponents.host = "api.vk.com"
+        urlComponents.path = "/method/newsfeed.get"
+        urlComponents.queryItems = [URLQueryItem(name: "filters", value: "post"),
+                                    URLQueryItem(name: "start_from", value: nextFrom),
+                                    URLQueryItem(name: "count", value: "20"),
+                                    URLQueryItem(name: "access_token", value: Session.instance.token),
+                                    URLQueryItem(name: "v", value: "5.131")]
+        return urlComponents.url
+       
     }
 }
 
@@ -188,4 +255,10 @@ private extension VKService {
             print(error)
         }
     }
+    
+    
+   
 }
+
+
+

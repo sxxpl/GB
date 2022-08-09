@@ -24,7 +24,7 @@ import Combine
 #endif
 
 /**
- An object representing a MongoDB Realm user.
+ An object representing an Atlas App Services user.
 
  - see: `RLMUser`
  */
@@ -48,7 +48,7 @@ public extension User {
 }
 
 /**
- A manager which configures and manages MongoDB Realm synchronization-related
+ A manager which configures and manages Atlas App Services synchronization-related
  functionality.
 
  - see: `RLMSyncManager`
@@ -169,7 +169,7 @@ public typealias SyncLogLevel = RLMSyncLogLevel
 
 /**
  A data type whose values represent different authentication providers that can be used with
- MongoDB Realm.
+ Atlas App Services.
 
  - see: `RLMIdentityProvider`
  */
@@ -178,7 +178,7 @@ public typealias Provider = RLMIdentityProvider
 /**
  * How the Realm client should validate the identity of the server for secure connections.
  *
- * By default, when connecting to MongoDB Realm over HTTPS, Realm will
+ * By default, when connecting to Atlas App Services over HTTPS, Realm will
  * validate the server's HTTPS certificate using the system trust store and root
  * certificates. For additional protection against man-in-the-middle (MITM)
  * attacks and similar vulnerabilities, you can pin a certificate or public key,
@@ -258,7 +258,7 @@ public enum ClientResetMode {
 
 /**
  A `SyncConfiguration` represents configuration parameters for Realms intended to sync with
- MongoDB Realm.
+ Atlas App Services.
  */
 @frozen public struct SyncConfiguration {
     /// The `SyncUser` who owns the Realm that this configuration should open.
@@ -266,7 +266,7 @@ public enum ClientResetMode {
 
     /**
      The value this Realm is partitioned on. The partition key is a property defined in
-     MongoDB Realm. All classes with a property with this value will be synchronized to the
+     Atlas App Services. All classes with a property with this value will be synchronized to the
      Realm.
      */
     public let partitionValue: AnyBSON?
@@ -343,7 +343,7 @@ public enum ClientResetMode {
     }
 }
 
-/// Structure providing an interface to call a MongoDB Realm function with the provided name and arguments.
+/// Structure providing an interface to call an Atlas App Services function with the provided name and arguments.
 ///
 ///     user.functions.sum([1, 2, 3, 4, 5]) { sum, error in
 ///         guard case let .int64(value) = sum else {
@@ -536,7 +536,7 @@ public extension User {
 
     /**
      The custom data of the user.
-     This is configured in your MongoDB Realm App.
+     This is configured in your Atlas App Services app.
     */
     var customData: Document {
         guard let rlmCustomData = self.__customData as RLMBSON?,
@@ -555,7 +555,7 @@ public extension User {
         return self.__mongoClient(withServiceName: serviceName)
     }
 
-    /// Call a MongoDB Realm function with the provided name and arguments.
+    /// Call an Atlas App Services function with the provided name and arguments.
     ///
     ///     user.functions.sum([1, 2, 3, 4, 5]) { sum, error in
     ///         guard case let .int64(value) = sum else {
@@ -785,7 +785,7 @@ public extension User {
         }
     }
 
-    /// Permanently deletes this user from your MongoDB Realm app.
+    /// Permanently deletes this user from your Atlas App Services app.
     /// The users state will be set to `Removed` and the session will be destroyed.
     /// If the delete request fails, the local authentication state will be untouched.
     /// @returns A publisher that eventually return `Result.success` or `Error`.
@@ -895,7 +895,7 @@ public extension User {
     }
 }
 
-@available(macOS 12.0, tvOS 15.0, iOS 15.0, watchOS 8.0, *)
+@available(macOS 10.15, tvOS 13.0, iOS 13.0, watchOS 6.0, *)
 extension FunctionCallable {
     /// The implementation of @dynamicMemberLookup that allows  for `async await` callable return.
     ///
@@ -916,7 +916,7 @@ extension FunctionCallable {
         }
     }
 }
-#endif // swift(>=5.5)
+#endif // swift(>=5.6)
 
 extension User {
     /**
@@ -931,6 +931,37 @@ extension User {
      */
     public func flexibleSyncConfiguration() -> Realm.Configuration {
         let config = self.__flexibleSyncConfiguration()
+        return ObjectiveCSupport.convert(object: config)
+    }
+
+    /**
+     Create a flexible sync configuration instance, which can be used to open a realm  which
+     supports flexible sync.
+
+     It won't be possible to combine flexible and partition sync in the same app, which means if you open
+     a realm with a flexible sync configuration, you won't be able to open a realm with a PBS configuration
+     and the other way around.
+
+     Using `rerunOnOpen` covers the cases where you want to re-run dynamic queries, for example time ranges.
+     ```
+     var config = user.flexibleSyncConfiguration(initialSubscriptions: { subscriptions in
+         subscriptions.append(QuerySubscription<User>() {
+             $0.birthdate < Date() && $0.birthdate > Calendar.current.date(byAdding: .year, value: 21)!
+         })
+     }, rerunOnOpen: true)
+     ```
+
+     - parameter initialSubscriptions: A block which receives a subscription set instance, that can be used to add an
+                                       initial set of subscriptions which will be executed when the Realm is first opened.
+     - parameter rerunOnOpen:          If true, allows to run the initial set of subscriptions specified, on every app startup.
+                                       This can be used to re-run dynamic time ranges and other queries that require a
+                                       re-computation of a static variable.
+
+
+     @return A `Realm.Configuration` instance with a flexible sync configuration.
+     */
+    public func flexibleSyncConfiguration(initialSubscriptions: @escaping ((SyncSubscriptionSet) -> Void), rerunOnOpen: Bool = false) -> Realm.Configuration {
+        let config = self.__flexibleSyncConfiguration(initialSubscriptions: ObjectiveCSupport.convert(block: initialSubscriptions), rerunOnOpen: rerunOnOpen)
         return ObjectiveCSupport.convert(object: config)
     }
 }
