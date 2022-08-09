@@ -144,88 +144,122 @@ class FriendPhotoSizes:Object,Decodable {
     }
 }
 
-///класс для новостей
-class VKNews: Object, Decodable{
-    @objc dynamic var response:VKResponse?
+///структуры для новостей
+struct VKNews: Codable{
+    var response:VKResponse
     
     enum CodingKeys:String,CodingKey {
         case response
     }
 }
 
-class VKResponse: Object, Decodable{
-    var items = List<NewsItems>()
-//    var profiles = List<NewsProfiles>()
-    let nextFrom:String = ""
+struct VKResponse: Codable {
+    var items:[NewsItems]
+    var profiles:[NewsProfiles]?
+    var groups:[GroupNews]?
+    var nextFrom:String
     
     enum CodingKeys:String,CodingKey {
         case items
-//        case profiles
+        case profiles
+        case groups
         case nextFrom = "next_from"
     }
 }
 
- final class NewsItems: Object, Decodable{
-    @objc dynamic var text:String
-    @objc dynamic var likes:NewsLikes?
-     
-//     var attachments = List<NewsAttachments>()
+class NewsItems: Codable{
+    var sourceID: Int = 0
+    var text:String = ""
+    var likes:NewsLikes
+    var attachments:[NewsAttachments]?
+    
     
     
     enum CodingKeys:String,CodingKey {
+        case sourceID = "source_id"
         case text
         case likes
-//        case attachments
+        case attachments
+    }
+    
+}
+
+final class NewsProfiles: Codable{
+    var id:Int
+    var firstName:String
+    var lastName:String
+    var photoProfile:String
+    
+    
+    enum CodingKeys:String,CodingKey {
+        case id
+        case firstName = "first_name"
+        case lastName = "last_name"
+        case photoProfile = "photo_100"
     }
 }
 
-//final class NewsProfiles: Object, Decodable{
-//    @objc dynamic var firstName:String
-//    @objc dynamic var lastName:String
-//    @objc dynamic var photoProfile:String
-//
-//
-//   enum CodingKeys:String,CodingKey {
-//       case firstName = "first_name"
-//       case lastName = "last_name"
-//       case photoProfile = "photo_100"
-//   }
-//}
+final class GroupNews: Codable{
+    var id:Int
+    var name:String
+    var photoProfile:String
+    
+    
+    enum CodingKeys:String,CodingKey {
+        case id
+        case name
+        case photoProfile = "photo_100"
+    }
+}
 
 
 
-final class NewsLikes: Object, Decodable{
-    @objc dynamic var count:Int
+final class NewsLikes: Codable {
+    var count:Int
     
     enum CodingKeys:String,CodingKey {
         case count
     }
 }
 
-//final class NewsAttachments: Object, Decodable{
-//    @objc dynamic var photo:NewsPhoto?
-//    
-//    enum CodingKeys:String,CodingKey {
-//        case photo
-//    }
-//}
-//
-//final class NewsPhoto: Object, Decodable{
-//    var sizes =  List<NewsPhotoSizes>()
-//    
-//    enum CodingKeys:String,CodingKey {
-//        case sizes
-//    }
-//}
-//
-//final class NewsPhotoSizes: Object, Decodable{
-//    @objc dynamic var url:String
-//    
-//    enum CodingKeys:String,CodingKey {
-//        case url
-//    }
-//}
-//
-//
-//
-//
+final class NewsAttachments: Codable {
+    var type: String
+    var photo:NewsPhoto?
+    
+    enum CodingKeys:String,CodingKey {
+        case type
+        case photo
+    }
+}
+
+final class NewsPhoto: Codable{
+    var id: Int
+    var ownerID: Int
+    var sizes:[NewsPhotoSizes]
+    
+    enum CodingKeys:String,CodingKey {
+        case id
+        case ownerID = "owner_id"
+        case sizes
+    }
+    
+}
+
+final class NewsPhotoSizes: Codable {
+    var url:String
+    var type: String
+    var width: Int
+    var height: Int
+    var aspectRatio: CGFloat { return CGFloat(height)/CGFloat(width) }
+    
+    enum CodingKeys:String,CodingKey {
+        case url
+        case type
+        case width
+        case height
+    }
+}
+
+
+
+

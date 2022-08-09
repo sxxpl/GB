@@ -16,11 +16,12 @@ class TextTableViewCell: UITableViewCell {
     var indexPath:IndexPath?
 //    private var tableViewClouser:(()->Void)
     
-    func configure(cellTextLabel: String,tableView:UITableView,indexPath:IndexPath){
-        self.cellTextLabel?.text = cellTextLabel
+    func configure(_ viewModel:NewsViewModel,tableView:UITableView,indexPath:IndexPath){
+        self.cellTextLabel = viewModel.cellTextLabel
         self.tableView = tableView
         self.indexPath = indexPath
     }
+    
     
 
     
@@ -32,14 +33,14 @@ class TextTableViewCell: UITableViewCell {
             DispatchQueue.main.async {
                 self.cellTextLabel?.numberOfLines = 0
                 self.showMoreButton.configuration?.title = "Свернуть"
-                self.tableView?.reloadSections(IndexSet(self.indexPath ?? IndexPath()), with: .automatic)
+                self.tableView?.reloadRows(at: [self.indexPath ?? IndexPath()], with: .automatic)
             }
         } else {
             showMoreFlag.toggle()
             DispatchQueue.main.async {
                 self.cellTextLabel?.numberOfLines = 4
                 self.showMoreButton.configuration?.title = "Показать полностью..."
-                self.tableView?.reloadSections(IndexSet(self.indexPath ?? IndexPath()), with: .none)
+                self.tableView?.reloadRows(at: [self.indexPath ?? IndexPath()], with: .automatic)
             }
         }
     }

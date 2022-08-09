@@ -11,8 +11,8 @@ class PhotoTableViewCell: UITableViewCell {
 
     @IBOutlet weak var cellImage: UIImageView!
 
-    func configure(cellImage: UIImage){
-        self.cellImage.image = cellImage
+    func configure(_ viewModel:NewsViewModel){
+        self.cellImage = viewModel.cellImage
     
     }
 }

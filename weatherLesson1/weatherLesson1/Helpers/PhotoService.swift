@@ -47,8 +47,7 @@ class PhotoService{
             image = photo
         } else {
             loadPhotoWithIndexPath(atIndexPath: indexPath, byUrl: url)
-            let photo = getImageFromCache(url: url)
-            image = photo
+            image = images[url]
         }
         return image
     }
@@ -147,8 +146,7 @@ extension PhotoService {
             image = photo
         } else {
             loadPhoto( byUrl: url)
-            let photo = getImageFromCache(url: url)
-            image = photo
+            image = images[url]
         }
         return image
     }

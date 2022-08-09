@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		4029091142EC9CF227B37589 /* Pods_weatherLesson1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 060F3AF6172A34C538B885CB /* Pods_weatherLesson1.framework */; };
 		AD03AC0F282BF3A3002040B6 /* RealmCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD03AC0E282BF3A3002040B6 /* RealmCacheService.swift */; };
-		AD03AC11282D7C7D002040B6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AD03AC10282D7C7D002040B6 /* GoogleService-Info.plist */; };
 		AD03AC15282D7E5A002040B6 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = AD03AC14282D7E5A002040B6 /* FirebaseAnalytics */; };
 		AD03AC17282D7E5A002040B6 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = AD03AC16282D7E5A002040B6 /* FirebaseAnalyticsOnDeviceConversion */; };
 		AD03AC19282D7E5A002040B6 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AD03AC18282D7E5A002040B6 /* FirebaseAnalyticsSwift */; };
@@ -36,6 +35,7 @@
 		AD03AC43282D7E5A002040B6 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = AD03AC42282D7E5A002040B6 /* FirebaseStorage */; };
 		AD03AC45282D7E5A002040B6 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = AD03AC44282D7E5A002040B6 /* FirebaseStorageCombine-Community */; };
 		AD03AC47282D8246002040B6 /* FirebaseCommunity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD03AC46282D8246002040B6 /* FirebaseCommunity.swift */; };
+		AD1022022889CED100F0EFB2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AD1022012889CED100F0EFB2 /* GoogleService-Info.plist */; };
 		AD2B37542869C7F300107EAF /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2B37532869C7F300107EAF /* PhotoService.swift */; };
 		AD55141D27BD09F100667DD6 /* MainTabBarContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD55141C27BD09F100667DD6 /* MainTabBarContoller.swift */; };
 		AD8B363B27B57F18003FA6CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8B363A27B57F18003FA6CA /* AppDelegate.swift */; };
@@ -55,6 +55,8 @@
 		AD975BD42847B34800862E83 /* LikeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD975BD22847B34800862E83 /* LikeTableViewCell.xib */; };
 		AD975BD52847C8B000862E83 /* AuthorTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD975BC22847AF4A00862E83 /* AuthorTableViewCell.xib */; };
 		AD975BD7284DEF3000862E83 /* NewsStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD975BD6284DEF2F00862E83 /* NewsStruct.swift */; };
+		ADBC441A28A2958000F6965B /* FriendsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBC441928A2958000F6965B /* FriendsAdapter.swift */; };
+		ADBC441E28A2A1F100F6965B /* NewsCellsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBC441D28A2A1F100F6965B /* NewsCellsFactory.swift */; };
 		ADC9B9B2280D581F00C2A940 /* VKService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC9B9B1280D581F00C2A940 /* VKService.swift */; };
 		ADC9B9B4280D7DCE00C2A940 /* webViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC9B9B3280D7DCE00C2A940 /* webViewController.swift */; };
 		ADC9B9B628104EEA00C2A940 /* VKData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC9B9B528104EEA00C2A940 /* VKData.swift */; };
@@ -88,9 +90,8 @@
 		1231B8C2DC1EA45DD9FC352A /* Pods-weatherLesson1.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-weatherLesson1.release.xcconfig"; path = "Target Support Files/Pods-weatherLesson1/Pods-weatherLesson1.release.xcconfig"; sourceTree = "<group>"; };
 		8BE5C86AF9E75C69836C9855 /* Pods-weatherLesson1.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-weatherLesson1.debug.xcconfig"; path = "Target Support Files/Pods-weatherLesson1/Pods-weatherLesson1.debug.xcconfig"; sourceTree = "<group>"; };
 		AD03AC0E282BF3A3002040B6 /* RealmCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmCacheService.swift; sourceTree = "<group>"; };
-		AD03AC10282D7C7D002040B6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		AD03AC12282D7C81002040B6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AD03AC46282D8246002040B6 /* FirebaseCommunity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseCommunity.swift; sourceTree = "<group>"; };
+		AD1022012889CED100F0EFB2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AD2B37532869C7F300107EAF /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
 		AD55141C27BD09F100667DD6 /* MainTabBarContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarContoller.swift; sourceTree = "<group>"; };
 		AD8B363727B57F18003FA6CA /* weatherLesson1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = weatherLesson1.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,6 +113,8 @@
 		AD975BD12847B34800862E83 /* LikeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeTableViewCell.swift; sourceTree = "<group>"; };
 		AD975BD22847B34800862E83 /* LikeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LikeTableViewCell.xib; sourceTree = "<group>"; };
 		AD975BD6284DEF2F00862E83 /* NewsStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsStruct.swift; sourceTree = "<group>"; };
+		ADBC441928A2958000F6965B /* FriendsAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsAdapter.swift; sourceTree = "<group>"; };
+		ADBC441D28A2A1F100F6965B /* NewsCellsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCellsFactory.swift; sourceTree = "<group>"; };
 		ADC9B9B1280D581F00C2A940 /* VKService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKService.swift; sourceTree = "<group>"; };
 		ADC9B9B3280D7DCE00C2A940 /* webViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = webViewController.swift; sourceTree = "<group>"; };
 		ADC9B9B528104EEA00C2A940 /* VKData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKData.swift; sourceTree = "<group>"; };
@@ -214,7 +217,7 @@
 				ADE36A29283F9AE400C436EB /* Helpers */,
 				ADE192B127C3FC9E0027FABF /* Model */,
 				AD8B364327B57F1C003FA6CA /* Assets.xcassets */,
-				AD03AC12282D7C81002040B6 /* GoogleService-Info.plist */,
+				AD1022012889CED100F0EFB2 /* GoogleService-Info.plist */,
 				AD8B364827B57F1C003FA6CA /* Info.plist */,
 			);
 			path = weatherLesson1;
@@ -223,6 +226,7 @@
 		AD975BB42847A6AD00862E83 /* NewsCells */ = {
 			isa = PBXGroup;
 			children = (
+				ADBC441D28A2A1F100F6965B /* NewsCellsFactory.swift */,
 				AD975BB52847A6D200862E83 /* AuthorCell */,
 				AD975BB62847A6DF00862E83 /* TextCell */,
 				AD975BB72847A6EC00862E83 /* PhotoCell */,
@@ -279,6 +283,7 @@
 		ADE192B127C3FC9E0027FABF /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				ADBC441928A2958000F6965B /* FriendsAdapter.swift */,
 				ADE192B227C3FCD90027FABF /* UserStruct.swift */,
 				ADE192BA27C4005F0027FABF /* GroupStruct.swift */,
 				ADC9B9B528104EEA00C2A940 /* VKData.swift */,
@@ -292,7 +297,6 @@
 			children = (
 				ADE1936727FFA0150027FABF /* BigPhoto */,
 				AD55141C27BD09F100667DD6 /* MainTabBarContoller.swift */,
-				AD03AC10282D7C7D002040B6 /* GoogleService-Info.plist */,
 				ADC9B9B3280D7DCE00C2A940 /* webViewController.swift */,
 				AD8B366127BACEAD003FA6CA /* WeatherViewController.swift */,
 				ADE1936828004BCC0027FABF /* CustomAnimation.swift */,
@@ -465,13 +469,13 @@
 			files = (
 				ADE1930127CFDDC90027FABF /* Friend2TableViewCell.xib in Resources */,
 				AD8B364727B57F1C003FA6CA /* LaunchScreen.storyboard in Resources */,
+				AD1022022889CED100F0EFB2 /* GoogleService-Info.plist in Resources */,
 				AD8B364427B57F1C003FA6CA /* Assets.xcassets in Resources */,
 				AD975BD52847C8B000862E83 /* AuthorTableViewCell.xib in Resources */,
 				AD8B364227B57F18003FA6CA /* Main.storyboard in Resources */,
 				AD975BD02847B2AE00862E83 /* PhotoTableViewCell.xib in Resources */,
 				AD975BCA2847B03800862E83 /* TextTableViewCell.xib in Resources */,
 				AD975BD42847B34800862E83 /* LikeTableViewCell.xib in Resources */,
-				AD03AC11282D7C7D002040B6 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -528,6 +532,7 @@
 				ADE1936427FF4D090027FABF /* PhotosGalViewController.swift in Sources */,
 				ADED6AF72865EE630008636B /* AppError.swift in Sources */,
 				ADE192A627BD695A0027FABF /* TestViewController.swift in Sources */,
+				ADBC441E28A2A1F100F6965B /* NewsCellsFactory.swift in Sources */,
 				AD55141D27BD09F100667DD6 /* MainTabBarContoller.swift in Sources */,
 				ADC9B9B4280D7DCE00C2A940 /* webViewController.swift in Sources */,
 				ADE192BF27C401380027FABF /* DrawningControl.swift in Sources */,
@@ -535,6 +540,7 @@
 				AD03AC0F282BF3A3002040B6 /* RealmCacheService.swift in Sources */,
 				ADE192B027BD7B590027FABF /* FriendCollectionViewCell.swift in Sources */,
 				AD975BD7284DEF3000862E83 /* NewsStruct.swift in Sources */,
+				ADBC441A28A2958000F6965B /* FriendsAdapter.swift in Sources */,
 				ADE1936627FF95890027FABF /* PhotoCollectionViewCell.swift in Sources */,
 				AD975BD32847B34800862E83 /* LikeTableViewCell.swift in Sources */,
 				ADE192B327C3FCD90027FABF /* UserStruct.swift in Sources */,
@@ -639,7 +645,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -694,7 +700,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

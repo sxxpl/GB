@@ -10,8 +10,7 @@ import RealmSwift
 
 class FriendTableViewController: UITableViewController {
 
-    let service = VKService()
-    var VKFriendsModel: Results<VKFriends>?
+    let service = FriendsAdapter()
     var friends=[User]()
     var sortedFriends = [Character:[User]]()
 
@@ -32,7 +31,7 @@ class FriendTableViewController: UITableViewController {
         super.viewDidLoad()
         
         photoService = PhotoService(container: tableView)
-        createNotificatoinToken()
+       // createNotificatoinToken()
         loadFriends()
     }
 
@@ -96,26 +95,15 @@ class FriendTableViewController: UITableViewController {
 
     ///загрузка друзей вк
     private func loadFriends(){
-        service.getFriends { [weak self]  in
+        service.getFriends{ [weak self] newFriends in
                 DispatchQueue.main.async {
-                    self?.VKFriendsModel = self?.friendRespons
-//                    self?.loadFriendsInfo()
-                    self?.infoTransform()
+                    self?.friends = newFriends
                     self?.sortedFriends = (self?.sort(friends: self?.friends ?? [])) ?? [:]
                     self?.tableView.reloadData()
                 }
         }
     }
 
-
-
-/// преобразование информации из json  в обычный массив
-    private func infoTransform(){
-        let list = List<FriendInformationResponse>()
-        for response in VKFriendsModel?.first?.response?.items ?? list {
-            self.friends.append(User(name: response.firstName + " " + response.lastName,image: photoService?.photo( byUrl: response.photoProfile) ?? UIImage(),id: response.id))
-        }
-    }
 
     ///передача id для загрузки фото
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

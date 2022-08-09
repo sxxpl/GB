@@ -195,7 +195,9 @@ final class VKService {
                                     URLQueryItem(name: "count", value: "20"),
                                     URLQueryItem(name: "access_token", value: Session.instance.token),
                                     URLQueryItem(name: "v", value: "5.131")]
+        print(urlComponents.url)
         return urlComponents.url
+        
        
     }
     

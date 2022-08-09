@@ -15,7 +15,7 @@ class LikeControl: UIControl {
     
     override func awakeFromNib() {
         likeImage.backgroundColor = .clear
-        likeImage.tintColor = .red
+        likeImage.tintColor = .myRed
     }
 
 

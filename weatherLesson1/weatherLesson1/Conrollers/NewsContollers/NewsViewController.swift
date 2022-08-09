@@ -18,6 +18,9 @@ class NewsViewController: UIViewController {
     
     var photoService: PhotoService?
     
+    let viewModelFactory = NewsCellsFactory()
+    var viewModels:[NewsViewModel] = []
+    
     private lazy var tableView:UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints=false
@@ -69,9 +72,10 @@ extension NewsViewController{
                 DispatchQueue.main.async {
                     self?.vkNewsModel = news
                     self?.infoTransform()
+                    self?.viewModels = self?.viewModelFactory.constructViewModels(from: self?.news ?? []) ?? []
                     self?.tableView.reloadData()
                 }
-                self?.nextForm = self?.vkNewsModel?.response?.nextFrom ?? ""
+                self?.nextForm = self?.vkNewsModel?.response.nextFrom ?? ""
             case .failure(let error):
                 print(error)
             }
@@ -88,7 +92,7 @@ extension NewsViewController{
                     self?.tableView.reloadData()
                     self?.tableView.refreshControl?.endRefreshing()
                 }
-                self?.nextForm = self?.vkNewsModel?.response?.nextFrom ?? ""
+                self?.nextForm = self?.vkNewsModel?.response.nextFrom ?? ""
             case .failure(let error):
                 print(error)
             }
@@ -101,10 +105,10 @@ extension NewsViewController{
             case .success(let news):
                 DispatchQueue.main.async {
                     self?.vkNewsModel = news
-                    self?.infoTransformWithoutRemoving()
+                    self?.infoTransform()
                     self?.tableView.reloadData()
                 }
-                self?.nextForm = self?.vkNewsModel?.response?.nextFrom ?? ""
+                self?.nextForm = self?.vkNewsModel?.response.nextFrom ?? ""
             case .failure(let error):
                 print(error)
             }
@@ -112,27 +116,80 @@ extension NewsViewController{
     }
     
     private func infoTransform(){
-        self.news.removeAll()
-        for item in vkNewsModel?.response?.items ?? List<NewsItems>() {
-            self.news.append(News(countOfLikes: item.likes?.count ?? 0, text: item.text,image: UIImage(named: "rus")!))
+//        self.news.removeAll()
+        var newsItems = vkNewsModel?.response.items
+        let groups = vkNewsModel?.response.groups
+        let profiles = vkNewsModel?.response.profiles
+        for item in vkNewsModel?.response.items ?? [NewsItems]() {
+            self.news.append(News(countOfLikes: item.likes.count ?? 0, text: item.text))
         }
-//        var i = 0
-//        for profile in vkNewsModel?.response?.profiles ?? List<NewsProfiles>() {
-//            self.news[i].authorName = (profile.firstName + " " + profile.lastName)
-//            self.news[i].authorImage = photoService?.photo(byUrl: profile.photoProfile) ?? UIImage()
-//            i+=1
-//        }
+        
+        guard let newsItems = newsItems,
+              let groups = groups,
+              let profiles = profiles
+        else{
+            return
+        }
+        for i in 0..<newsItems.count{
+            var photoUrl:String? = vkNewsModel?.response.items[i].attachments?.first?.photo?.sizes.last?.url ?? nil
+            if let photoUrl = photoUrl {
+                news[i].image = photoService?.photo(byUrl: photoUrl)
+            } else {
+                news[i].image = nil
+            }
+            if newsItems[i].sourceID < 0 {
+                let group = groups.first(where: { $0.id == -newsItems[i].sourceID })
+                news[i].authorImage = (photoService?.photo(byUrl: group?.photoProfile ?? "") ?? UIImage())!
+                news[i].authorName = group?.name ?? ""
+            } else {
+                let profile = profiles.first(where: { $0.id == newsItems[i].sourceID })
+                news[i].authorImage = (photoService?.photo(byUrl: profile?.photoProfile ?? "") ?? UIImage())!
+                news[i].authorName = (profile?.firstName ?? "") + (profile?.lastName ?? "")
+            }
+        }
     }
+        
     
     private func infoTransformWithoutRemoving(){
-        for item in vkNewsModel?.response?.items ?? List<NewsItems>() {
-            self.news.append(News(countOfLikes: item.likes?.count ?? 0, text: item.text,image: UIImage(named: "rus")!))
+        var newsItems = vkNewsModel?.response.items
+        let groups = vkNewsModel?.response.groups
+        let profiles = vkNewsModel?.response.profiles
+        for item in vkNewsModel?.response.items ?? [NewsItems]() {
+            self.news.append(News(countOfLikes: item.likes.count ?? 0, text: item.text))
+        }
+        
+        guard let newsItems = newsItems,
+              let groups = groups,
+              let profiles = profiles
+        else{
+            return
+        }
+        for i in 0..<newsItems.count{
+            var photoUrl:String? = vkNewsModel?.response.items[i].attachments?.first?.photo?.sizes.last?.url ?? nil
+            if let photoUrl = photoUrl {
+                news[i].image = photoService?.photo(byUrl: photoUrl)
+            } else {
+                news[i].image = nil
+            }
+            if newsItems[i].sourceID < 0 {
+                let group = groups.first(where: { $0.id == -newsItems[i].sourceID })
+                news[i].authorImage = (photoService?.photo(byUrl: group?.photoProfile ?? "") ?? UIImage())!
+                news[i].authorName = group?.name ?? ""
+            } else {
+                let profile = profiles.first(where: { $0.id == newsItems[i].sourceID })
+                news[i].authorImage = (photoService?.photo(byUrl: profile?.photoProfile ?? "") ?? UIImage())!
+                news[i].authorName = (profile?.firstName ?? "") + (profile?.lastName ?? "")
+            }
         }
     }
 }
 
 
 extension NewsViewController:UITableViewDelegate,UITableViewDataSource{
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+       return configure(indexPath)
+    }
     
     func configure(_ indexPath:IndexPath) -> UITableViewCell{
         switch indexPath.row {
@@ -141,56 +198,70 @@ extension NewsViewController:UITableViewDelegate,UITableViewDataSource{
             {
                 return UITableViewCell()
             }
-            cell.configure(authorImage: UIImage(named: "rus") ??  UIImage(),authorLabel: "author")
+            cell.configure(viewModels[indexPath.row])
             return cell
         case 1:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "TextTableViewCell") as? TextTableViewCell else
             {
                 return UITableViewCell()
             }
-            cell.configure(cellTextLabel: news[indexPath.section].text,tableView: self.tableView, indexPath: indexPath)
+            cell.configure(viewModels[indexPath.row],tableView: self.tableView, indexPath: indexPath)
             return cell
         case 2:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoTableViewCell") as? PhotoTableViewCell else
             {
                 return UITableViewCell()
             }
-            cell.configure(cellImage: news[indexPath.section].image)
+            guard let image = news[indexPath.section].image else
+            {
+                return UITableViewCell()
+            }
+            cell.configure(viewModels[indexPath.row])
             return cell
         case 3:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "LikeTableViewCell") as? LikeTableViewCell else
             {
                 return UITableViewCell()
             }
-            cell.configure(numberOfLikes: news[indexPath.section].countOfLikes)
+            cell.configure(viewModels[indexPath.row])
             return cell
         default:
             return UITableViewCell()
         }
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       return configure(indexPath)
-    }
-    
     func numberOfSections(in tableView: UITableView) -> Int {
-        return news.count;
+        return viewModels.count;
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4;
     }
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if indexPath.row == 2{
-//            let tableWidth = tableView.bounds.width
-//            let news = self.news[indexPath.section]
-//            let cellHeight = tableWidth * news.aspectRatio
-//            return cellHeight
-//        }
-//        return UITableView.automaticDimension
-//    }
-//
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.row {
+        case 0:
+            return UITableView.automaticDimension
+        case 1:
+            if news[indexPath.section].text.isEmpty {
+                return 0
+            }
+        case 2:
+            guard
+                let _ = news[indexPath.section].image else {
+                return 0
+            }
+            let width = view.frame.width
+            let cellHeight = width * (vkNewsModel?.response.items[indexPath.section].attachments?.first?.photo?.sizes.last?.aspectRatio ?? 1)
+            return cellHeight
+            
+        case 3:
+            return UITableView.automaticDimension
+        default:
+            return 0
+        }
+        return UITableView.automaticDimension
+    }
     
 }
 

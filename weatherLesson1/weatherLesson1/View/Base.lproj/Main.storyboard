@@ -13,6 +13,7 @@
         <!--Weather View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <viewController id="BYZ-38-t0r" customClass="WeatherViewController" customModule="weatherLesson1" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
@@ -148,7 +149,6 @@
                         <outlet property="personPassWord" destination="Iw5-9j-4Xc" id="DdV-Vw-Rqg"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1431" y="765"/>
         </scene>
@@ -354,24 +354,6 @@
                 </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="7254.6728971962611" y="-261.12311015118792"/>
-        </scene>
-        <!--Friend2 Table View Controller-->
-        <scene sceneID="dyI-cM-0dZ">
-            <objects>
-                <tableViewController id="q1a-Rc-Poe" customClass="Friend2TableViewController" customModule="weatherLesson1" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="dyQ-iD-mvF">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <connections>
-                            <outlet property="dataSource" destination="q1a-Rc-Poe" id="hL3-ji-hsk"/>
-                            <outlet property="delegate" destination="q1a-Rc-Poe" id="f9H-Se-HJd"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wPh-uk-9rx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="8517.7570093457944" y="-338.22894168466524"/>
         </scene>
         <!--Main Tab Bar Contoller-->
         <scene sceneID="eUz-pN-ta1">
@@ -603,40 +585,6 @@
             </objects>
             <point key="canvasLocation" x="6400.934579439252" y="434.77321814254861"/>
         </scene>
-        <!--Canvas View Controller-->
-        <scene sceneID="Meu-bT-2OA">
-            <objects>
-                <viewController id="cTe-n2-tJG" customClass="CanvasViewController" customModule="weatherLesson1" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="qnJ-QV-HVB">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pwf-y6-0WZ" customClass="DrawningControl" customModule="weatherLesson1" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="249" width="428" height="428"/>
-                                <color key="backgroundColor" systemColor="systemIndigoColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="428" id="512-XC-biA"/>
-                                    <constraint firstAttribute="width" secondItem="Pwf-y6-0WZ" secondAttribute="height" multiplier="1:1" id="qTL-Rd-j0z"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="hYp-fU-fV9"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="Pwf-y6-0WZ" firstAttribute="trailing" secondItem="hYp-fU-fV9" secondAttribute="trailing" id="1pW-hr-WJl"/>
-                            <constraint firstItem="Pwf-y6-0WZ" firstAttribute="centerY" secondItem="qnJ-QV-HVB" secondAttribute="centerY" id="Dds-ko-sFl"/>
-                            <constraint firstItem="Pwf-y6-0WZ" firstAttribute="centerX" secondItem="qnJ-QV-HVB" secondAttribute="centerX" id="JnH-f1-R6n"/>
-                            <constraint firstItem="Pwf-y6-0WZ" firstAttribute="leading" secondItem="hYp-fU-fV9" secondAttribute="leading" id="qle-IO-7CT"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="drawningController" destination="Pwf-y6-0WZ" id="c32-ll-Lzg"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="y29-YJ-WOt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2279.4392523364486" y="1228.5097192224623"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="r8z-31-mgO">
             <objects>
@@ -670,9 +618,6 @@
         </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemIndigoColor">
-            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
